@@ -1,0 +1,82 @@
+.home-section {
+    max-height: 100vh;
+    width: 100vw;
+    .advert-1 {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        background-image: url("../static/advert1.avif");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        h2 {
+            color: azure;
+        }
+        .search-for-your-vehicle {
+            min-width: 50%;
+            min-height: 10%;
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+            align-items: center;
+            select {
+                min-height: 5vh;
+                padding: .4em 1em;
+            }
+            #search-for-your-car {
+                flex: 0 1 15%;
+                min-height: 5vh;
+                svg {
+                    max-width: 1.5em;
+                    max-height: 1.5em;
+                }
+            }
+        }
+    }
+    .select-category-menu {
+        height: 40vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        width: 100%;
+        .category-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6em;
+            cursor: pointer;
+        }
+    }
+    .carousel {
+        width: 100vw;
+        height: 100vh;
+        text-align: center;
+        user-select: none;
+        overflow-x: hidden; /* hide scrollbars on page */
+        overflow-y: hidden;
+        .slide {              
+              li {
+                display: grid;
+                width: 350px;
+                height: 385px;
+                border-radius: 5px;
+                font-size: 1.5rem;
+                font-family: 'Poppins', sans-serif;
+                text-align: center;
+                box-shadow: 0 0 1rem grey;
+                background: white;
+                padding: 1rem;
+                line-height: 2;
+                img {
+                    width: 350px;
+                    height: 350px;
+                  }
+              }  
+          }
+      }      
+}

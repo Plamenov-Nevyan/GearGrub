@@ -1,0 +1,30 @@
+header {
+  max-height: 30vh;
+  display: flex;
+  padding: 0.5em;
+  background: #07121F;
+}
+header .logo-container {
+  max-height: 100%;
+  flex: 1 1 33%;
+}
+header .logo-container img {
+  width: 14%;
+  height: 100%;
+}
+header nav {
+  flex: 0 1 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+header nav ul {
+  list-style-type: none;
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+header nav ul li a {
+  color: azure;
+  cursor: pointer;
+}/*# sourceMappingURL=header.css.map */

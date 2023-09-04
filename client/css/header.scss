@@ -1,0 +1,32 @@
+header {
+    max-height: 30vh;
+    display: flex;
+    padding: 0.5em;
+    background: #07121F;
+    .logo-container {
+        max-height: 100%;
+        flex: 1 1 33%;
+        img {
+            width: 14%;
+            height: 100%;
+        }
+    }
+    nav {
+        flex: 0 1 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        ul {
+            list-style-type: none;
+            display: flex;
+            gap: 1em;
+            flex-wrap: wrap;
+            li {
+              a {
+                color: azure;
+                cursor: pointer;
+              }
+            }
+        }
+    }
+}
