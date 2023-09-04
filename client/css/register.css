@@ -1,137 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Bitter:wght@100;200;300;400;500;600;700&family=Catamaran:wght@100;300;400;500;600;700&family=Maven+Pro:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700;800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-family: "Maven Pro", sans-serif;
-  font-size: 16px;
-  line-height: 1.3;
-}
-
-a {
-  text-decoration: none;
-}
-
-header {
-  max-height: 30vh;
-  display: flex;
-  padding: 0.5em;
-  background: #07121F;
-}
-header .logo-container {
-  max-height: 100%;
-  flex: 1 1 33%;
-}
-header .logo-container img {
-  width: 14%;
-  height: 100%;
-}
-header nav {
-  flex: 0 1 30%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-header nav ul {
-  list-style-type: none;
-  display: flex;
-  gap: 1em;
-  flex-wrap: wrap;
-}
-header nav ul li a {
-  color: azure;
-  cursor: pointer;
-}
-
-.home-section {
-  max-height: 100vh;
-  width: 100vw;
-}
-.home-section .advert-1 {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  background-image: url("../static/advert1.avif");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.home-section .advert-1 h2 {
-  color: azure;
-}
-.home-section .advert-1 .search-for-your-vehicle {
-  min-width: 50%;
-  min-height: 10%;
-  display: flex;
-  justify-content: center;
-  gap: 1em;
-  align-items: center;
-}
-.home-section .advert-1 .search-for-your-vehicle select {
-  min-height: 5vh;
-  padding: 0.4em 1em;
-}
-.home-section .advert-1 .search-for-your-vehicle #search-for-your-car {
-  flex: 0 1 15%;
-  min-height: 5vh;
-}
-.home-section .advert-1 .search-for-your-vehicle #search-for-your-car svg {
-  max-width: 1.5em;
-  max-height: 1.5em;
-}
-.home-section .select-category-menu {
-  height: 40vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.home-section .select-category-menu .category-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.6em;
-  cursor: pointer;
-  height: 100%;
-  justify-content: center;
-}
-.home-section .carousel {
-  width: 100vw;
-  height: 60vh;
-}
-.home-section .carousel .slide li {
-  display: grid;
-  width: 350px;
-  height: 385px;
-  border-radius: 5px;
-  font-size: 1.5rem;
-  font-family: "Poppins", sans-serif;
-  text-align: center;
-  box-shadow: 0 0 1rem grey;
-  background: white;
-  padding: 1rem;
-  line-height: 2;
-}
-.home-section .carousel .slide li img {
-  width: 350px;
-  height: 350px;
-}
-
 .forms-page {
   position: relative;
   display: flex;
   min-width: 100svw;
   min-height: 100svh;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
   gap: 2em;
 }
@@ -157,6 +28,9 @@ header nav ul li a {
   height: 1em;
 }
 .forms-page .form-el {
+  position: absolute;
+  top: 20%;
+  left: 35%;
   min-width: 30vw;
   min-height: 50vh;
   display: flex;
@@ -207,70 +81,10 @@ header nav ul li a {
   font-weight: bold;
   transition: ease-in-out 200ms;
 }
-.forms-page .login-form {
-  background-color: #15172B;
-}
-@media only screen and (max-width: 350px) {
-  .forms-page .login-form {
-    transform: translate(-30%, -20%);
-  }
-}
-@media only screen and (max-width: 768px) {
-  .forms-page .login-form {
-    transform: translate(-20%, -20%);
-  }
-}
-.forms-page .login-form .heading h2 {
-  color: azure;
-}
-.forms-page .login-form p {
-  color: azure;
-}
-.forms-page .login-form p span {
-  color: orchid;
-  cursor: pointer;
-}
-.forms-page .login-form p span svg {
-  max-width: 1em;
-  max-height: 1em;
-  fill: orchid;
-  display: none;
-}
-.forms-page .login-form p span:hover {
-  text-decoration: underline;
-}
-.forms-page .login-form p span:hover svg {
-  display: inline;
-}
-.forms-page .login-form fieldset input {
-  background-color: transparent;
-  color: azure;
-  outline: none;
-  border-bottom: 2px solid azure;
-  opacity: 0.3;
-}
-.forms-page .login-form fieldset input:focus {
-  opacity: 1;
-}
-.forms-page .login-form fieldset label {
-  color: azure;
-}
-.forms-page .login-form #login-btn {
-  background: linear-gradient(to left, rgb(212, 251, 63) 32%, rgb(252, 176, 70) 68%);
-  background-size: 200% 100%;
-  background-position: left bottom;
-  transition: ease-in-out 200ms;
-  transition: all 600ms ease;
-}
-@media only screen and (max-width: 576px) {
-  .forms-page .login-form #login-btn {
-    max-width: 100%;
-  }
-}
-.forms-page .login-form #login-btn:hover {
-  background-position: right bottom;
-}
 .forms-page .register-form {
+  opacity: 0;
+  top: 0;
+  left: 65%;
   gap: 1em;
 }
 @media only screen and (max-width: 768px) {
@@ -470,4 +284,4 @@ header nav ul li a {
 }
 .forms-page .register-form .tac-span .open-dialog-span:hover {
   text-decoration: underline;
-}/*# sourceMappingURL=combined.css.map */
+}/*# sourceMappingURL=register.css.map */

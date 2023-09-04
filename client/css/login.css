@@ -1,0 +1,148 @@
+.forms-page {
+  position: relative;
+  display: flex;
+  min-width: 100svw;
+  min-height: 100svh;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  gap: 2em;
+}
+.forms-page .tac-section {
+  display: none;
+  max-height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.forms-page .tac-section ul li {
+  font-size: 1.8rem;
+}
+.forms-page .action-success {
+  display: none;
+  min-height: 10vh;
+}
+.forms-page .action-success #success-check {
+  top: 0.3em;
+  right: -2em;
+  position: absolute;
+  z-index: 10;
+  width: 1em;
+  height: 1em;
+}
+.forms-page .form-el {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  min-width: 30vw;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  padding: 2em;
+  background: #eee;
+  border-radius: 0.7em;
+  justify-content: center;
+}
+.forms-page .form-el fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  position: relative;
+}
+.forms-page .form-el fieldset input {
+  padding: 0.6em 0.5em;
+  border: none;
+}
+.forms-page .form-el fieldset input.error {
+  border: 2px solid red;
+  border-radius: 0.6em;
+}
+.forms-page .form-el fieldset .error-message {
+  display: none;
+  color: red;
+}
+.forms-page .form-el fieldset input:focus + label,
+.forms-page .form-el fieldset input + label.static {
+  transform: translateY(-1em);
+}
+.forms-page .form-el fieldset label {
+  padding: 0 0.4em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: transform 200ms ease;
+  pointer-events: none;
+}
+.forms-page .form-el .btn {
+  max-width: 30%;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: ease-in-out 200ms;
+}
+.forms-page .login-form {
+  background-color: #15172B;
+}
+@media only screen and (max-width: 350px) {
+  .forms-page .login-form {
+    transform: translate(-30%, -20%);
+  }
+}
+@media only screen and (max-width: 768px) {
+  .forms-page .login-form {
+    transform: translate(-20%, -20%);
+  }
+}
+.forms-page .login-form .heading h2 {
+  color: azure;
+}
+.forms-page .login-form p {
+  color: azure;
+}
+.forms-page .login-form p span {
+  color: orchid;
+  cursor: pointer;
+}
+.forms-page .login-form p span svg {
+  max-width: 1em;
+  max-height: 1em;
+  fill: orchid;
+  display: none;
+}
+.forms-page .login-form p span:hover {
+  text-decoration: underline;
+}
+.forms-page .login-form p span:hover svg {
+  display: inline;
+}
+.forms-page .login-form fieldset input {
+  background-color: transparent;
+  color: azure;
+  outline: none;
+  border-bottom: 2px solid azure;
+  opacity: 0.3;
+}
+.forms-page .login-form fieldset input:focus {
+  opacity: 1;
+}
+.forms-page .login-form fieldset label {
+  color: azure;
+}
+.forms-page .login-form #login-btn {
+  background: linear-gradient(to left, rgb(212, 251, 63) 32%, rgb(252, 176, 70) 68%);
+  background-size: 200% 100%;
+  background-position: left bottom;
+  transition: ease-in-out 200ms;
+  transition: all 600ms ease;
+}
+@media only screen and (max-width: 576px) {
+  .forms-page .login-form #login-btn {
+    max-width: 100%;
+  }
+}
+.forms-page .login-form #login-btn:hover {
+  background-position: right bottom;
+}/*# sourceMappingURL=login.css.map */

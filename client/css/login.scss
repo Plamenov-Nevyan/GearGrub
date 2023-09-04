@@ -1,0 +1,152 @@
+@import "./breakpoints.scss" ;
+
+.forms-page {
+    position: relative;
+    display: flex;
+    min-width: 100svw;
+    min-height: 100svh;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    gap: 2em;
+    .tac-section {
+        display: none;
+        max-height: 100%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        ul {
+            li {
+                font-size: clamp(1.5rem, 1.8rem, 2.4rem);
+            }
+        }
+    }
+    
+    .action-success {
+        display: none;
+        min-height: 10vh;
+        #success-check {
+            top: 0.3em;
+             right: -2em;
+            position: absolute;
+            z-index: 10;
+            width: 1em;
+            height: 1em;
+        }
+    }
+    
+    .form-el {
+        position: absolute;
+        top: 20%;
+        left: 35%;
+        min-width: 30vw;
+        min-height: 50vh;
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        padding: 2em;
+        background: #eee;
+        border-radius: 0.7em;
+        justify-content: center;
+        fieldset {
+            border: none;
+            display: flex;
+            flex-direction: column;
+            gap: .3em;
+            position: relative;
+            input {
+                padding: .6em  .5em;
+                border: none;
+            }
+            input.error {
+                border: 2px solid red;
+                border-radius: .6em;
+            }
+            .error-message {
+                display: none;
+                color: red;
+            }
+            input:focus + label,
+            input + label.static {
+                transform: translateY(-1em);
+            }
+            label {
+                padding: 0 .4em;
+                position: absolute;
+                left: 0;
+                top: 0;
+                transition: transform 200ms ease;
+                pointer-events: none;
+            }
+        }
+        .btn {
+            max-width: 30%;
+            padding: 0.5em 1em;
+            border-radius: 0.5em;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: ease-in-out 200ms;
+        }
+    }
+    .login-form {
+        background-color: #15172B;
+        @include sm {
+            transform: translate(-30%, -20%);
+        }
+        @include lg {
+            transform: translate(-20%, -20%);
+        }
+        .heading {
+            h2 {
+                color: azure;
+            }
+        }
+        p {
+            color: azure;
+            span {
+                color: orchid;
+                cursor: pointer;
+                svg {
+                    max-width: 1em;
+                    max-height: 1em;
+                    fill: orchid;
+                    display: none;
+                }
+            }
+            span:hover {
+                text-decoration: underline;
+                svg {
+                    display: inline;
+                }
+            }
+        }
+        fieldset {
+            input {
+                background-color: transparent;
+                color: azure;
+                outline: none;
+                border-bottom: 2px solid azure;
+                opacity: .3;
+            }
+            input:focus {
+                opacity: 1;
+            }
+            label {
+                color: azure;
+            }
+        }
+        #login-btn {
+            @include md {
+                max-width: 100%;
+            }
+            background: linear-gradient(to left, rgba(212,251,63,1) 32%, rgba(252,176,70,1) 68%);
+            background-size: 200% 100%;
+            background-position:left bottom;
+            transition: ease-in-out 200ms;
+            transition:all 600ms ease;
+        }
+        #login-btn:hover {
+            background-position:right bottom;
+        }
+    }
+}
