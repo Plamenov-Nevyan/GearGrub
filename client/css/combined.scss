@@ -509,3 +509,74 @@ header {
         }
     }
 }
+
+
+//  Catalog 
+
+.catalog-section {
+    background-color: #FAFAFA;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 1em;
+    gap: 0.6em;
+    h1 {
+        flex: 1 1 100%;
+    }
+    .sidebar {
+        flex: 1 1 20%;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        background: #FFFFFF;
+        border: 1px solid #DFE3E8;
+        border-radius: 0.5em;
+        .sidebar-top {
+            position: relative;
+            h3 {
+                text-align: center;
+            }
+            #searchCategory {
+                width: 100%;
+                padding: 0.3em 1em;
+                outline: none;
+            }
+            svg {
+                max-width: 1.3em;
+                max-height: 1.3em;
+                position: absolute;
+                top: 1.7em;
+                right: 0.5em;
+            }
+        }
+        .sidebar-middle {
+            ul {
+                list-style-type: none;
+            }
+        }
+        .line-divider {
+            height: 1vh;
+            background-color: gainsboro;
+        }
+        .sidebar-bottom {
+            ul {
+                list-style-type: none;
+            }
+        }
+    }
+    .items-container {
+        flex: 1 1 60%;
+        display: grid;
+        grid-template-columns: minmax(100px, 200px) 1fr 1fr;
+        grid-gap: 2em;
+        padding: 1em;
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            gap: 1em;
+        }
+    }
+}

@@ -12,7 +12,7 @@ export const preloadRegisterData = (ctx, next) => {
         // if(isInfoCorrect && doPasswordsMatch){
             await registerUser({username,email, phone, password})
             // ctx.showNotification(`Welcome, ${username}! Your registration is done.`, `loadingBox`)
-            // ctx.page.redirect('/')
+            ctx.page.redirect('/catalog')
         // }
         // // else{
         //     if(!isInfoCorrect){ctx.showNotification(`Please fill all fields !`, `errorBox`); return}
