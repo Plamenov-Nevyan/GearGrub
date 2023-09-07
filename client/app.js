@@ -5,11 +5,13 @@ import {homeViewInit} from "./middlewares/initViewAnims/homeViewInit.js"
 import {loginView} from "./views/loginView.js";
 import {registerView} from "./views/registerView.js";
 import {loginViewInit} from "./middlewares/initViewAnims/loginViewInit.js";
+import {registerViewInit} from "./middlewares/initViewAnims/registerViewInit.js";
+import {preloadRegisterData} from "./middlewares/viewPreloads/registerPreload.js"
 
 page(renderMiddleware)
 page(navMiddleware)
 page('/', homeView, homeViewInit)
 page('/login', loginView, loginViewInit)
-page('/register', registerView)
+page('/register',preloadRegisterData, registerView, registerViewInit)
 
 page.start()

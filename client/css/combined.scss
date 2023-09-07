@@ -242,7 +242,7 @@ header {
         }
         p {
             color: azure;
-            span {
+            a {
                 color: orchid;
                 cursor: pointer;
                 svg {
@@ -252,7 +252,7 @@ header {
                     display: none;
                 }
             }
-            span:hover {
+            a:hover {
                 text-decoration: underline;
                 svg {
                     display: inline;
@@ -464,7 +464,7 @@ header {
         }
         p {
             color: cornflowerblue;
-            span {
+            a {
                 color: orchid;
                 cursor: pointer;
                 svg {
@@ -474,7 +474,7 @@ header {
                     display: none;
                 }
             }
-            span:hover {
+            a:hover {
                 text-decoration: underline;
                 svg {
                     display: inline;

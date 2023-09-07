@@ -241,20 +241,20 @@
 .forms-page .register-form p {
   color: cornflowerblue;
 }
-.forms-page .register-form p span {
+.forms-page .register-form p a {
   color: orchid;
   cursor: pointer;
 }
-.forms-page .register-form p span svg {
+.forms-page .register-form p a svg {
   fill: orchid;
   max-width: 1em;
   max-height: 1em;
   display: none;
 }
-.forms-page .register-form p span:hover {
+.forms-page .register-form p a:hover {
   text-decoration: underline;
 }
-.forms-page .register-form p span:hover svg {
+.forms-page .register-form p a:hover svg {
   display: inline;
 }
 .forms-page .register-form #register-btn {

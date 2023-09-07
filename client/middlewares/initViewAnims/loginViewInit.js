@@ -20,5 +20,5 @@ export function loginViewInit(){
                 $(this).css("background-image", "url(" + images[i] + ")");
                 $(this).fadeIn("slow");
             });
-        }, 5000);
+        }, 10000);
 }

@@ -103,7 +103,7 @@
         }
         p {
             color: azure;
-            span {
+            a {
                 color: orchid;
                 cursor: pointer;
                 svg {
@@ -113,7 +113,7 @@
                     display: none;
                 }
             }
-            span:hover {
+            a:hover {
                 text-decoration: underline;
                 svg {
                     display: inline;
