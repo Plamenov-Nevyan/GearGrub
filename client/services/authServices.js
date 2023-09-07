@@ -30,3 +30,7 @@ export async function loginUser(data){
         return userResponse
     }
 }
+
+export async function destroyBackendSession(){
+    await apiRequests.del(null, 'delete=deleteSession')
+}

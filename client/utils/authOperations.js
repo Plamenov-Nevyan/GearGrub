@@ -1,3 +1,5 @@
+import { destroyBackendSession } from "../services/authServices.js"
+
 // function getToken(){
 //     let user = JSON.parse(localStorage.getItem(`user`))
 //     return user.accessToken
@@ -7,10 +9,19 @@ function getSession(){
     return session ? JSON.parse(session) : null
 }
 function createSession(sessionData){
-   sessionStorage.setItem(`session`, JSON.stringify(sessionData))
+   sessionStorage.setItem(`session`, JSON.stringify({userId: sessionData[0], userRole: sessionData[1]}))
 }
-function clearSession(){
+function getUserId(){
+    let session = sessionStorage.getItem(`session`) 
+    return session ? JSON.parse(session).userId : null
+}
+function getUserRole(){
+    let session = sessionStorage.getItem(`session`)
+    return session ? JSON.parse(session).userRole : null
+}
+async function clearSession(){
     sessionStorage.clear()
+    await destroyBackendSession()
 }
 // function navUpdate(user = false){
 //     const welcomeMsg = document.querySelector(`#welcome-message`)

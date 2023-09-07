@@ -9,12 +9,14 @@ import {registerViewInit} from "./middlewares/initViewAnims/registerViewInit.js"
 import {preloadRegisterData} from "./middlewares/viewPreloads/registerPreload.js"
 import {catalogView} from "./views/catalogView.js";
 import {preloadLoginData} from "./middlewares/viewPreloads/loginPreload.js";
+import { logout } from "./handlers/logoutHandler.js";
 
 page(renderMiddleware)
 page(navMiddleware)
 page('/', homeView, homeViewInit)
 page('/login', preloadLoginData, loginView, loginViewInit)
 page('/register',preloadRegisterData, registerView, registerViewInit)
+page('/logout', logout)
 page('/catalog', catalogView)
 
 page.start()

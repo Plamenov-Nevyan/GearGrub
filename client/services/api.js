@@ -1,7 +1,7 @@
 // import { authOperations } from "../utils/authentication.js"
 const url = `http://localhost/GearGrub/server/main.php`
 
-async function apiCall(method = `GET`,data){
+async function apiCall(method = `GET`,data, query){
     const options = {
         method,
         headers: {}
@@ -15,7 +15,7 @@ async function apiCall(method = `GET`,data){
     //     options.headers['X-Authorization'] = authOperations.getToken()
     // }
 try{
-   let resp = await fetch(`${url}`, options)
+   let resp = query ? await fetch(`${url}?${query}`, options) : await fetch(`${url}`, options)
    if(!resp.ok){
     //    if(resp.status == 403){authOperations.clearStorage()}
        if(resp.status == 404){return resp}
@@ -23,7 +23,9 @@ try{
        throw new Error(error.message)
    }
    if(resp.status == 204){return resp}
-   else{return resp.json()}
+   if(method !== 'DELETE'){
+    return resp.json()
+   }
 }catch(err){
      alert(err.message)
      throw new Error(err.message)
