@@ -10,12 +10,12 @@ export const loginTemplate = () => html`
         <fieldset class="input-field">
             <input class="user-data-input" type="text" id="email" name="email"/>
             <label for="email"> Email: </label>
-            <span class="error-message" id="email-login-error"></span>
+            <span class="error-message" id="email-error"></span>
         </fieldset>
         <fieldset class="input-field">
             <input class="user-data-input" type="password" id="password" name="password"/>
             <label for="password"> Password: </label>
-            <span class="error-message" id="password-login-error"></span>
+            <span class="error-message" id="password-error"></span>
         </fieldset>
         <p>Don't have an account yet ? Hurry and 
             <a id="redirect-register" href="/register">

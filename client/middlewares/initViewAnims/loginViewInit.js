@@ -1,4 +1,5 @@
 export function loginViewInit(){
+    clearErrorsOnFocus()
     let images = [
         "https://images.unsplash.com/photo-1604068105030-06d82bb48fd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80",
          "https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80", 
@@ -21,4 +22,14 @@ export function loginViewInit(){
                 $(this).fadeIn("slow");
             });
         }, 10000);
+        function clearErrorsOnFocus(){
+            $('.user-data-input').each(function(){
+                $(this).focus(function(){
+                    if($(this).hasClass('error')){
+                        $(this).removeClass('error')
+                        $(`#${$(this).attr('id')}-error`).slideUp('slow')
+                    }
+                })
+            })
+        }
 }

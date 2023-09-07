@@ -2,6 +2,7 @@ export function registerViewInit(){
     initToolTips()
     initAddMediaLinkBtnsAndInput()
     clearAllErrors()
+    clearErrorsOnFocus()
 
     function initToolTips(){
         // find the tooltips for every media icon and attach mouse-enter and mouse-leave events to them allowing them to slide-in/out when the
@@ -82,6 +83,16 @@ export function registerViewInit(){
                 $(this).removeClass('error')
                 $(`#${$(this).attr('id')}-error`).slideUp('slow')
             }
+        })
+    }
+    function clearErrorsOnFocus(){
+        $('.user-data-input').each(function(){
+            $(this).focus(function(){
+                if($(this).hasClass('error')){
+                    $(this).removeClass('error')
+                    $(`#${$(this).attr('id')}-error`).slideUp('slow')
+                }
+            })
         })
     }
 }
