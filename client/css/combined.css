@@ -664,6 +664,7 @@ header nav ul li a {
   top: -2em;
 }
 .create-section form fieldset.select-field .other-input {
+  display: none;
   position: relative;
 }
 .create-section form fieldset.select-field .other-input label {

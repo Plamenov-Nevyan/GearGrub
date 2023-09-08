@@ -1,15 +1,52 @@
 export function createViewInit(ctx){
-let categorySelected = $('select#category').find(":selected").val()
-let subcategoryOptions = subcategoriesTemplates(categorySelected)
-console.log(categorySelected)
-$('select#subcategory').append(subcategoryOptions)
 
-
-$('select#category').on('change', function(e){
-    categorySelected = $(this).find(":selected").val()
+$(document).ready(function(){
+    let categorySelected = $('select#category').find(":selected").val()
     let subcategoryOptions = subcategoriesTemplates(categorySelected)
-    $('select#subcategory').empty()
+    console.log(categorySelected)
     $('select#subcategory').append(subcategoryOptions)
+
+
+    $('select#category').on('change', function(e){
+        categorySelected = $(this).find(":selected").val()
+
+        if(categorySelected !== 'other'){
+            let subcategoryOptions = subcategoriesTemplates(categorySelected)
+            $('select#subcategory').empty()
+            $('select#subcategory').append(subcategoryOptions)
+            if($('#category-other-input').css('display') !== 'none'){
+                $('#category-other-input').slideUp('fast')
+                $('#subcategory-other-input').slideUp('fast')
+            }
+        }else {
+            $('#category-other-input').slideDown('fast')
+            $('#subcategory-other-input').slideDown('fast')
+            $('select#subcategory').empty()
+            $('select#subcategory').append('<option class="subcategory-option" value="other">Other</option>')
+        }
+    })
+    
+    $('select#subcategory').on('change', function(e){
+        let subcategorySelected = $(this).find(":selected").val()
+        if(subcategorySelected !== 'other'){
+            if($('#subcategory-other-input').css('display') !== 'none'){
+                $('#subcategory-other-input').slideUp('fast')
+            }
+        }else {
+            $('#subcategory-other-input').slideDown('fast')
+        }
+    })
+
+    $('select#forCar').on('change', function(e){
+        let forCarSelected = $(this).find(":selected").val()
+        if(forCarSelected !== 'other'){
+            if($('#forCar-other-input').css('display') !== 'none'){
+                $('#forCar-other-input').slideUp('fast')
+            }
+        }else {
+            $('#forCar-other-input').slideDown('fast')
+        }
+    })
 })
 
 

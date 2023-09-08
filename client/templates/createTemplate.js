@@ -44,7 +44,7 @@ export const createTemplate = () => html`
                 <option class="category-option" value="detailing">Car Detailing</option>
                 <option class="category-option" value="other">Other</option>
             </select>
-            <div class="other-input">
+            <div class="other-input" id="category-other-input">
                 <input class="create-data-input" type="text" id="category" name="category"/>
                 <label for="category">Specify the product category:</label>
                 <span class="error-message" id="category-error"></span>
@@ -55,7 +55,7 @@ export const createTemplate = () => html`
             <select class="create-data-input" id="subcategory" name="subcategory">
  
             </select>
-            <div class="other-input">
+            <div class="other-input" id="subcategory-other-input">
                 <input class="create-data-input" type="text" id="subcategory" name="subcategory"/>
                 <label for="subcategory">Specify the product sub-category:</label>
                 <span class="error-message" id="subcategory-error"></span>
@@ -64,9 +64,20 @@ export const createTemplate = () => html`
         <fieldset class="select-field">
             <label for="forCar">For which car brand is this product:</label>
             <select class="create-data-input" id="forCar" name="forCar">
-
+                <option id="forCar-option" value="bmw">BMW</option>
+                <option id="forCar-option" value="mercedes">Mercedes</option>
+                <option id="forCar-option" value="audi">Audi</option>
+                <option id="forCar-option" value="peugeot">Peugeot</option>
+                <option id="forCar-option" value="nissan">Nissan</option>
+                <option id="forCar-option" value="opel">Opel</option>
+                <option id="forCar-option" value="volkswagenGolf">Volkswagen Golf</option>
+                <option id="forCar-option" value="volkswagenPassat">Volkswagen Passat</option>
+                <option id="forCar-option" value="renault">Renault</option>
+                <option id="forCar-option" value="citroen">Citroen</option>
+                <option id="forCar-option" value="dodge">Dodge</option>
+                <option id="forCar-option" value="other">Other</option>
             </select>
-            <div class="other-input">
+            <div class="other-input" id="forCar-other-input">
                 <input class="create-data-input" type="text" id="forCar" name="forCar"/>
                 <label for="forCar">Specify for which car brand is this product:</label>
                 <span class="error-message" id="forCar-error"></span>
