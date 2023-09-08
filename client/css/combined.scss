@@ -602,3 +602,116 @@ header {
         }
     }
 }
+
+
+        //  Create Section 
+
+.create-section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .heading-container {
+        background: blueviolet;
+        max-width: 80%;
+        width: 80%;
+        border-radius: 0.6em;
+        h1 {
+            color: azure;
+            text-align: center;
+        }
+    }
+    form {
+        padding: 2em;
+        background-color: #15172B;
+        border-radius: 0.7em;
+        display: flex;
+        max-width: 50vw;
+        flex-wrap: wrap;
+        gap: 2em;
+        justify-content: center;
+        #description-field {
+            flex: 1 1 100%;
+            textarea {
+                min-height: 20vh;
+                max-height: 30vh;
+                height: 30vh;
+                background: transparent;
+                border: 3px solid azure;
+                border-radius: 0.8em;
+                color: azure;
+                padding: 0.4em 1em;
+                width: 100%;
+            }
+            label {
+                top: 1em;
+                left: 1em;
+            }
+            textarea:focus + label,
+            textarea + label.static {
+                transform: translateY(-2em);
+            }
+        }
+        fieldset {
+            border: none;
+            display: flex;
+            flex-direction: column;
+            gap: .3em;
+            position: relative;
+            flex: 1 1 33%;
+            padding: .5em 1em;
+            textarea {
+                min-height: 20%;
+            }
+            input {
+                padding: .6em  .5em;
+                border: none;
+                background-color: transparent;
+                color: azure;
+                outline: none;
+                border-bottom: 2px solid azure;
+                opacity: .3;
+            }
+            input.error {
+                border: 2px solid red;
+                border-radius: .6em;
+            }
+            input:focus {
+                opacity: 1;
+            }
+            .error-message {
+                display: none;
+                color: red;
+            }
+            input:focus + label,
+            input + label.static{
+                transform: translateY(-1em);
+            }
+            label {
+                color: azure;
+                padding: 0 .4em;
+                position: absolute;
+                left: 0;
+                top: 0;
+                transition: transform 200ms ease;
+                pointer-events: none;
+            }
+        }
+        fieldset.select-field {
+            display: flex;
+            flex-direction: column;
+            gap: 2em;
+            position: relative;
+            label {
+               top: -2em;
+            }
+            .other-input {
+                position: relative;
+                label {
+                    top: 0;
+                }
+            }
+        }
+    }
+}

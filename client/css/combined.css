@@ -558,4 +558,114 @@ header nav ul li a {
   align-items: center;
   position: relative;
   gap: 1em;
+}
+
+.create-section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.create-section .heading-container {
+  background: blueviolet;
+  max-width: 80%;
+  width: 80%;
+  border-radius: 0.6em;
+}
+.create-section .heading-container h1 {
+  color: azure;
+  text-align: center;
+}
+.create-section form {
+  padding: 2em;
+  background-color: #15172B;
+  border-radius: 0.7em;
+  display: flex;
+  max-width: 50vw;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: center;
+}
+.create-section form #description-field {
+  flex: 1 1 100%;
+}
+.create-section form #description-field textarea {
+  min-height: 20vh;
+  max-height: 30vh;
+  height: 30vh;
+  background: transparent;
+  border: 3px solid azure;
+  border-radius: 0.8em;
+  color: azure;
+  padding: 0.4em 1em;
+  width: 100%;
+}
+.create-section form #description-field label {
+  top: 1em;
+  left: 1em;
+}
+.create-section form #description-field textarea:focus + label,
+.create-section form #description-field textarea + label.static {
+  transform: translateY(-2em);
+}
+.create-section form fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  position: relative;
+  flex: 1 1 33%;
+  padding: 0.5em 1em;
+}
+.create-section form fieldset textarea {
+  min-height: 20%;
+}
+.create-section form fieldset input {
+  padding: 0.6em 0.5em;
+  border: none;
+  background-color: transparent;
+  color: azure;
+  outline: none;
+  border-bottom: 2px solid azure;
+  opacity: 0.3;
+}
+.create-section form fieldset input.error {
+  border: 2px solid red;
+  border-radius: 0.6em;
+}
+.create-section form fieldset input:focus {
+  opacity: 1;
+}
+.create-section form fieldset .error-message {
+  display: none;
+  color: red;
+}
+.create-section form fieldset input:focus + label,
+.create-section form fieldset input + label.static {
+  transform: translateY(-1em);
+}
+.create-section form fieldset label {
+  color: azure;
+  padding: 0 0.4em;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: transform 200ms ease;
+  pointer-events: none;
+}
+.create-section form fieldset.select-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  position: relative;
+}
+.create-section form fieldset.select-field label {
+  top: -2em;
+}
+.create-section form fieldset.select-field .other-input {
+  position: relative;
+}
+.create-section form fieldset.select-field .other-input label {
+  top: 0;
 }/*# sourceMappingURL=combined.css.map */

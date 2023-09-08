@@ -6,7 +6,9 @@ import { authOperations } from "../utils/authOperations.js"
 export function navMiddleware(ctx, next){
     let session = authOperations.getSession()
     if(session){
-       session.userRole === 'user' ? render(navTemplates.navTemplateUser(), container) : render(navTemplates.navTemplateMod(), container)
+       session.userRole === 'user' 
+       ? render(navTemplates.navTemplateUser(), container)
+       : render(navTemplates.navTemplateMod(session.userRole), container)
     }else {
         render(navTemplates.navTemplateGuest(), container)
     }

@@ -170,7 +170,7 @@ function subcategoriesTemplates(showSubcategoriesFor){
             <li class="subcategory-li" id="adBlue">AdBlue</li>
             <li class="subcategory-li" id="oilAdditives">Oil Additives</li>
             <li class="subcategory-li" id="adhesivesAndSealants">Adhesives and Sealants</li>
-            <li class="subcategory-li" id="windshieldFluid">Windshield Fluid</li>
+            <li class="subcategory-li" id="windshieldFluids">Windshield Fluids</li>
         `
     }else if(showSubcategoriesFor === 'accessories'){
         return`

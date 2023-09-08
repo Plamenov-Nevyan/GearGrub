@@ -44,7 +44,7 @@ export const navTemplateUser = () => html`
 </nav>
 `
 
-export const navTemplateMod = () => html`
+export const navTemplateMod = (isAdminOrOwner) => html`
 <div class="logo-container">
 <img src="static/logo.png" alt="logo"/>
 </div>
@@ -62,9 +62,21 @@ export const navTemplateMod = () => html`
     <li>
     <a href="/adm-dashboard" id="dashboard-link">Admin Dashboard</a>
     </li>
+    ${isAdminOrOwner
+        ? addMakeProductOfferLink()
+        : nothing
+    }
     <li>
     <a href="/logout" id="logout-btn">Logout<a>
     </li>
 </ul>
 </nav>
 `
+
+function addMakeProductOfferLink(){
+    return html`
+    <li>
+    <a href="/create-offer" id="create-offer-link">Create a offer</a>
+    </li>
+    `
+}
