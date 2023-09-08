@@ -18,6 +18,7 @@
         border: 1px solid #DFE3E8;
         border-radius: 0.5em;
         .sidebar-top {
+            display: none;
             position: relative;
             h3 {
                 text-align: center;
@@ -36,17 +37,38 @@
             }
         }
         .sidebar-middle {
+            display: none;
             ul {
                 list-style-type: none;
+                li {
+                    cursor: pointer;
+                    padding: .5em;
+                    border-radius: .6em;
+                    transition: ease-in-out 200ms;
+                }
+                li:hover, li.active-category {
+                    background-color: gainsboro;
+                }
             }
         }
         .line-divider {
+            display: none;
             height: 1vh;
             background-color: gainsboro;
         }
         .sidebar-bottom {
             ul {
                 list-style-type: none;
+                li {
+                    cursor: pointer;
+                    padding: .5em;
+                    border-radius: .6em;
+                    transition: ease-in-out 200ms;
+                }
+                li:hover, li.active {
+                    background-color: #6658D3;
+                    color: azure;
+                }
             }
         }
     }

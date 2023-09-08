@@ -533,6 +533,7 @@ header {
         border: 1px solid #DFE3E8;
         border-radius: 0.5em;
         .sidebar-top {
+            display: none;
             position: relative;
             h3 {
                 text-align: center;
@@ -551,17 +552,38 @@ header {
             }
         }
         .sidebar-middle {
+            display: none;
             ul {
                 list-style-type: none;
+                .subcategory-li {
+                    cursor: pointer;
+                    padding: .5em;
+                    border-radius: .6em;
+                    transition: ease-in-out 200ms;
+                }
+                li:hover, li.active-subcategory {
+                    background-color: gainsboro;
+                }
             }
         }
         .line-divider {
+            display: none;
             height: 1vh;
             background-color: gainsboro;
         }
         .sidebar-bottom {
             ul {
                 list-style-type: none;
+                .category-li {
+                    cursor: pointer;
+                    padding: .5em;
+                    border-radius: .6em;
+                    transition: ease-in-out 200ms;
+                }
+                li:hover, li.active-category {
+                    background-color: #6658D3;
+                    color: azure;
+                }
             }
         }
     }

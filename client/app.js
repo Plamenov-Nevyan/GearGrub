@@ -10,13 +10,16 @@ import {preloadRegisterData} from "./middlewares/viewPreloads/registerPreload.js
 import {catalogView} from "./views/catalogView.js";
 import {preloadLoginData} from "./middlewares/viewPreloads/loginPreload.js";
 import { logout } from "./handlers/logoutHandler.js";
+import {preloadHomeData} from "./middlewares/viewPreloads/homePreload.js";
+import {preloadCatalogData} from "./middlewares/viewPreloads/catalogPreload.js";
+import {catalogViewInit} from "./middlewares/initViewAnims/catalogViewInit.js";
 
 page(renderMiddleware)
 page(navMiddleware)
-page('/', homeView, homeViewInit)
+page('/', preloadHomeData, homeView, homeViewInit)
 page('/login', preloadLoginData, loginView, loginViewInit)
 page('/register',preloadRegisterData, registerView, registerViewInit)
 page('/logout', logout)
-page('/catalog', catalogView)
+page('/catalog', preloadCatalogData, catalogView, catalogViewInit)
 
 page.start()

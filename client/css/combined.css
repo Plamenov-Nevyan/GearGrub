@@ -494,6 +494,7 @@ header nav ul li a {
   border-radius: 0.5em;
 }
 .catalog-section .sidebar .sidebar-top {
+  display: none;
   position: relative;
 }
 .catalog-section .sidebar .sidebar-top h3 {
@@ -511,15 +512,38 @@ header nav ul li a {
   top: 1.7em;
   right: 0.5em;
 }
+.catalog-section .sidebar .sidebar-middle {
+  display: none;
+}
 .catalog-section .sidebar .sidebar-middle ul {
   list-style-type: none;
 }
+.catalog-section .sidebar .sidebar-middle ul .subcategory-li {
+  cursor: pointer;
+  padding: 0.5em;
+  border-radius: 0.6em;
+  transition: ease-in-out 200ms;
+}
+.catalog-section .sidebar .sidebar-middle ul li:hover, .catalog-section .sidebar .sidebar-middle ul li.active-subcategory {
+  background-color: gainsboro;
+}
 .catalog-section .sidebar .line-divider {
+  display: none;
   height: 1vh;
   background-color: gainsboro;
 }
 .catalog-section .sidebar .sidebar-bottom ul {
   list-style-type: none;
+}
+.catalog-section .sidebar .sidebar-bottom ul .category-li {
+  cursor: pointer;
+  padding: 0.5em;
+  border-radius: 0.6em;
+  transition: ease-in-out 200ms;
+}
+.catalog-section .sidebar .sidebar-bottom ul li:hover, .catalog-section .sidebar .sidebar-bottom ul li.active-category {
+  background-color: #6658D3;
+  color: azure;
 }
 .catalog-section .items-container {
   flex: 1 1 60%;

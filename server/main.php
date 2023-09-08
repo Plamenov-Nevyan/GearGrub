@@ -48,4 +48,62 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             session_destroy();
         }
     }
+}else if($_SERVER["REQUEST_METHOD"] === "GET"){
+    if(isset($_GET["category"]) && isset($_GET["subcategory"])){
+        require_once "includes/getProductsHandler.php";
+        require_once "Classes/Product.php";
+        $category = $_GET["category"];
+        $subcategory = $_GET["subcategory"];
+        try{
+            $products = getProductsFromSubcategory($category, $subcategory);
+            $productsToSend = array();
+            foreach($products as $product){
+                $currentProduct = new Product(
+                    $product["id"],
+                    $product["name"],
+                    $product["image"],
+                    $product["price"]
+                );
+                $productsToSend[] = array(
+                    'id' => $currentProduct->getId(),
+                    'name' => $currentProduct->getName(),
+                    'image' => $currentProduct->getImage(),
+                    'price' => $currentProduct->getPrice()
+                );
+            };
+            header("Content-Type: application/json");
+            echo json_encode($productsToSend);
+        }catch(Exception $error){
+            echo 'Error: ' . $error->getMessage();
+        }
+
+    }else if(isset($_GET["forCar"]) || isset($_GET["category"])){
+        require_once "includes/getProductsHandler.php";
+        require_once "Classes/Product.php";
+        $forCar = $_GET["forCar"] || null;
+        $category = $_GET["category"] || null;
+        try {
+            $products = getProducts($forCar, $category);
+            $productsToSend = array();
+            foreach($products as $product){
+                $currentProduct = new Product(
+                    $product["id"],
+                    $product["name"],
+                    $product["image"],
+                    $product["price"]
+                );
+                $productsToSend[] = array(
+                    'id' => $currentProduct->getId(),
+                    'name' => $currentProduct->getName(),
+                    'image' => $currentProduct->getImage(),
+                    'price' => $currentProduct->getPrice()
+                );
+            };
+            header("Content-Type: application/json");
+            echo json_encode($productsToSend);
+            exit;
+        }catch(Exception $error){
+            echo 'Error' . $error->getMessage();
+        }
+    }
 }
