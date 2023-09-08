@@ -40,6 +40,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             echo 'Error: ' . $error->getMessage();
         };
 
+    }else if($action === 'createProduct'){
+        require_once "includes/createProductHandler.php";
+        try {
+           $productId = createProduct($data);
+        //    header("Content-Type: application/json");
+           echo $productId;
+        }catch(Exception $error){
+            echo 'Error: ' . $error->getMessage();
+        }
     }
 }else if($_SERVER["REQUEST_METHOD"] === 'DELETE'){
     if(isset($_GET["delete"])){

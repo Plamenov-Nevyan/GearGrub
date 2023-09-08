@@ -52,4 +52,66 @@ class ProductManagement extends Database {
         }
     }
 
+    public function createProduct($data){
+        try {
+            $this->checkForCreateDataErrors($data);
+            $productId = $this->insertProduct($data);
+            return $productId;
+            exit;
+        }catch(Exception $error){
+            throw $error;
+        }
+    }
+
+    private function checkForCreateDataErrors($data){
+        if(empty($data["name"]) || strlen($data["name"]) < 4){
+            throw new Exception('Product name must be at least 4 characters long!');
+        }else if(empty($data["description"]) || strlen( $data["description"]) < 20){
+            throw new Exception('Product description must be at least 20 characters long!');
+        }else if(
+            empty($data["price"]) || 
+            filter_var($data["price"], FILTER_VALIDATE_INT) == false ||
+            filter_var($data["price"], FILTER_VALIDATE_FLOAT) == false
+        ){
+                throw new Exception('Product price should be a valid integer or float number');
+        }else if(
+            empty($data["quantityAvailable"]) || 
+            filter_var($data["price"], FILTER_VALIDATE_INT) == false 
+        ){
+                throw new Exception('Product quantity should be a valid integer');
+        }else if(
+            !strpos($data["image"], "http://") === 0 ||
+            !strpos($data["image"], "https://") === 0
+        ){
+            throw new Exception('Please provide a valid link for product image (must start with http or https)');
+        }else if(
+                $data["category"] === 'other' ||
+                $data["subcategory"] === 'other'||
+                $data["forCar"] === 'other'
+        ){
+            throw new Exception('Please select product category, sub-category and car brand designation');
+        }
+    }
+
+    private function insertProduct($data){
+        $pdo = $this->connect();
+        $query = "INSERT INTO products (name, description, category, subcategory, forCar, price, quantityAvailable, image, owner) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $statement = $pdo->prepare($query);
+        $statement->execute([
+            $data["name"],
+            $data["description"],
+            $data["category"],
+            $data["subcategory"],
+            $data["forCar"],
+            $data["price"],
+            $data["quantityAvailable"],
+            $data["image"],
+            $data["owner"],
+        ]);
+        $productId = $pdo->lastInsertId();
+        $pdo = null;
+        $statement = null;
+        return $productId;
+        exit;
+    }
 }

@@ -5,10 +5,10 @@ export function createValidator(inputValues){
     if(isThereEmptyFields){return errors}
     errors.name = inputValues.name.length >= 4 ? '' : 'Product name must be at least 4 characters long!'
     errors.description = inputValues.description.length >= 20 ? '' : 'Product description should be at least 20 characters long !'
-    errors.price = isNaN(inputValues.price)? '' : 'Product price should be a number !'
+    errors.price = isNaN(inputValues.price)? 'Product price should be a number !' : ''
     errors.quantityAvailable = isNaN(inputValues.quantityAvailable) 
-    ? '' 
-    : 'Product quantity should be a whole number!'
+    ? 'Product quantity should be a whole number!' 
+    : ''
     errors.image = inputValues.image.startsWith('http') || inputValues.image.startsWith('https')
     ? ''
     : 'Please provide a valid link for the product image !'

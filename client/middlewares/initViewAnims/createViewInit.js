@@ -20,13 +20,18 @@ $(document).ready(function(){
         e.preventDefault()
         let isThereErrors = ctx.checkForErrors(createData)
         if(isThereErrors){return}
-        // let newProduct = await ctx.createNewProduct(createData)
+        try {
+            createData.description = createData.description.trim()
+            let newProductId = await ctx.createNewProduct(createData)
+        console.log(newProductId)
+        }catch(err){
+            alert(err)
+        }
     })
     $('select#subcategory').append(subcategoryOptions)
 
     $('.create-data-input').each(function(){
         $(this).on('change', function(e){
-            console.log(createData)
             createData[$(this).attr('id')] = $(this).val()
         })
         $(this).on('focus',function(){

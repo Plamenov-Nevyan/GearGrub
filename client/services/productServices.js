@@ -21,6 +21,7 @@ export async function getProductsFromSubcategory(category, subcategory){
 }
 
 export async function createNewProduct(productData){
+    productData.action = "createProduct"
     let newProduct = await apiRequests.post(productData)
     return newProduct
 }
