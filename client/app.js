@@ -15,6 +15,7 @@ import {preloadCatalogData} from "./middlewares/viewPreloads/catalogPreload.js";
 import {catalogViewInit} from "./middlewares/initViewAnims/catalogViewInit.js";
 import {createView} from "./views/createView.js";
 import {createViewInit} from "./middlewares/initViewAnims/createViewInit.js";
+import {preloadCreateData} from "./middlewares/viewPreloads/createPreload.js";
 
 page(renderMiddleware)
 page(navMiddleware)
@@ -23,6 +24,6 @@ page('/login', preloadLoginData, loginView, loginViewInit)
 page('/register',preloadRegisterData, registerView, registerViewInit)
 page('/logout', logout)
 page('/catalog', preloadCatalogData, catalogView, catalogViewInit)
-page('/create-offer', createView, createViewInit)
+page('/create-offer', preloadCreateData, createView, createViewInit)
 
 page.start()

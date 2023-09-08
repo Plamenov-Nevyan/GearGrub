@@ -19,3 +19,8 @@ export async function getProductsFromSubcategory(category, subcategory){
     let products = await apiRequests.get(null, query)
     return products
 }
+
+export async function createNewProduct(productData){
+    let newProduct = await apiRequests.post(productData)
+    return newProduct
+}

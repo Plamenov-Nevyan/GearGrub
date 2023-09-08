@@ -6,7 +6,7 @@ export const createTemplate = () => html`
 <div class="heading-container">
     <h1>Create a new product offer.</h1>
 </div>
-<form>
+<form class="create-form">
         <fieldset class="input-field">
             <input class="create-data-input" type="text" id="name" name="name"/>
             <label for="name"> Product Name :</label>
@@ -83,6 +83,7 @@ export const createTemplate = () => html`
                 <span class="error-message" id="forCar-error"></span>
             </div>
         </fieldset>
+        <button id="create-btn">Create</button>
 </form>
 </section>
 `

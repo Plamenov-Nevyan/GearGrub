@@ -44,5 +44,7 @@ export const authOperations = {
     createSession,
     getSession,
     clearSession,
+    getUserId,
+    getUserRole
     // navUpdate
 }

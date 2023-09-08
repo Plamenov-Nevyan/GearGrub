@@ -1,14 +1,47 @@
-export function createViewInit(ctx){
+import {authOperations} from "../../utils/authOperations.js"
 
+export function createViewInit(ctx){
+    console.log(ctx)
+let createData = {
+    name: '',
+    description: '',
+    price: '',
+    quantityAvailable: '',
+    image: '',
+    category: '',
+    subcategory: '',
+    forCar: '',
+    owner: authOperations.getUserId()
+}
 $(document).ready(function(){
     let categorySelected = $('select#category').find(":selected").val()
     let subcategoryOptions = subcategoriesTemplates(categorySelected)
-    console.log(categorySelected)
+    $('.create-form').on('submit', async (e) => {
+        e.preventDefault()
+        let isThereErrors = ctx.checkForErrors(createData)
+        if(isThereErrors){return}
+        // let newProduct = await ctx.createNewProduct(createData)
+    })
     $('select#subcategory').append(subcategoryOptions)
+
+    $('.create-data-input').each(function(){
+        $(this).on('change', function(e){
+            console.log(createData)
+            createData[$(this).attr('id')] = $(this).val()
+        })
+        $(this).on('focus',function(){
+            if($(this).hasClass('error')){
+                $(this).removeClass('error')
+                $(`#${$(this).attr('id')}-error`).slideUp('slow')
+            }
+        })
+    })
+    
 
 
     $('select#category').on('change', function(e){
         categorySelected = $(this).find(":selected").val()
+        createData[category] = categorySelected
 
         if(categorySelected !== 'other'){
             let subcategoryOptions = subcategoriesTemplates(categorySelected)
@@ -28,6 +61,8 @@ $(document).ready(function(){
     
     $('select#subcategory').on('change', function(e){
         let subcategorySelected = $(this).find(":selected").val()
+        createData[subcategory] = subcategorySelected
+
         if(subcategorySelected !== 'other'){
             if($('#subcategory-other-input').css('display') !== 'none'){
                 $('#subcategory-other-input').slideUp('fast')
@@ -39,6 +74,8 @@ $(document).ready(function(){
 
     $('select#forCar').on('change', function(e){
         let forCarSelected = $(this).find(":selected").val()
+        createData[forCar] = forCarSelected
+
         if(forCarSelected !== 'other'){
             if($('#forCar-other-input').css('display') !== 'none'){
                 $('#forCar-other-input').slideUp('fast')
@@ -118,4 +155,5 @@ function subcategoriesTemplates(showSubcategoriesFor){
         `
     }
 }
+
 }
