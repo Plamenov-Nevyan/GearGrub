@@ -59,6 +59,17 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         }catch(Exception $error){
             echo 'Error: ' . $error->getMessage();
         }
+    }else if($action === 'addToCart'){
+        $userId = $_SESSION["userId"];
+        $productId = $data["productId"];
+        require_once "includes/shoppingCartHandler.php";
+        try {
+            $cartCount = addToCart($userId, $productId);
+            echo $cartCount;
+            exit;
+        }catch(Exception $error){
+            echo 'Error: ' . $error->getMessage();
+        }
     }
 }else if($_SERVER["REQUEST_METHOD"] === 'DELETE'){
     if(isset($_GET["delete"])){
@@ -182,6 +193,28 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             exit;
         }catch(Exception $error){
             echo 'Error: ' . $error->getMessage();
+        }
+    }else if(isset($_GET["getCart"])){
+        $userId = $_SESSION["userId"];
+        if($_GET["getCart"] === "getCartDetails"){
+            require_once "includes/shoppingCartHandler.php";
+            try{
+                $cart = getCart($userId);
+                header("Content-Type: application/json");
+                echo json_encode($cart);
+                exit;
+            }catch(Exception $error){
+                echo 'Error' . $error->getMessage();
+            }
+        }else if($_GET["getCart"] === "getCartCount"){
+            require_once "includes/shoppingCartHandler.php";
+            try{
+                $cartCount = getCartCount($userId);
+                echo $cartCount;
+                exit;
+            }catch(Exception $error){
+                echo 'Error' . $error->getMessage();
+            }
         }
     }
 }

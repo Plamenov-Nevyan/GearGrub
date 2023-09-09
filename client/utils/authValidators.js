@@ -8,7 +8,7 @@ export function validator(inputValues, action){
     if(action === 'register'){
         errors.username = inputValues.username.length > 4 ? '' : 'Username must be at least 4 characters long!'
         errors.email = emailValRegex.test(inputValues.email) ? '' : 'Please enter a valid email !'
-        errors.phone = isNaN(inputValues.phone) && inputValues.phone.length > 8 ? '' : 'Phone number can consist only of numbers and must be at least 8 characters long'
+        errors.phone = isNaN(inputValues.phone) && inputValues.phone.length < 8 ? 'Phone number can consist only of numbers and must be at least 8 characters long' : '' 
         errors.password = inputValues.password.length > 6 && passwordValRegex.test(inputValues.password) 
         ? '' 
         : 'Password must be at least 6 characters long and contain at least one letter and one number !'
