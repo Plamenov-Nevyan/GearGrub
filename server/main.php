@@ -49,6 +49,16 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         }catch(Exception $error){
             echo 'Error: ' . $error->getMessage();
         }
+    }else if ($action === 'editProduct'){
+        $productId = $_GET["productId"];
+        require_once "includes/editProductHandler.php";
+        try {
+           $updatedProductId = editProduct($data, $productId);
+        //    header("Content-Type: application/json");
+           echo $updatedProductId;
+        }catch(Exception $error){
+            echo 'Error: ' . $error->getMessage();
+        }
     }
 }else if($_SERVER["REQUEST_METHOD"] === 'DELETE'){
     if(isset($_GET["delete"])){

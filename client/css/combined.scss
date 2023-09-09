@@ -679,6 +679,10 @@ header {
                 color: azure;
                 padding: 0.4em 1em;
                 width: 100%;
+                opacity: .3;
+            }
+            textarea:focus {
+                opacity: 1;
             }
             label {
                 top: 1em;

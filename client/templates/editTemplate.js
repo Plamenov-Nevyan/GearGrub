@@ -1,34 +1,33 @@
 import { html, nothing } from "../node_modules/lit-html/lit-html.js"
 
-
-export const createTemplate = () => html`
+export const editTemplate = (product) => html`
 <section class="create-section">
 <div class="heading-container">
-    <h1>Create a new product offer.</h1>
+    <h1>Edit product offer.</h1>
 </div>
 <form class="create-form">
         <fieldset class="input-field">
-            <input class="create-data-input" type="text" id="name" name="name"/>
-            <label for="name"> Product Name :</label>
+            <input class="create-data-input" type="text" id="name" name="name" value="${product.name}" />
+            <label for="name">Product Name:</label>
             <span class="error-message" id="name-error"></span>
         </fieldset>
         <fieldset class="input-field" id="description-field">
-            <textarea class="create-data-input" id="description" name="description"></textarea>
+            <textarea class="create-data-input" id="description" name="description">${product.description}</textarea>
             <label for="description">Description :</label>
             <span class="error-message" id="description-error"></span>
         </fieldset>
         <fieldset class="input-field">
-            <input class="create-data-input" type="text" id="price" name="price"/>
+            <input class="create-data-input" type="text" id="price" name="price" value="${product.price}"/>
             <label for="price">Price :</label>
             <span class="error-message" id="price-error"></span>
         </fieldset>
         <fieldset class="input-field">
-            <input class="create-data-input" type="number" id="quantityAvailable" name="quantityAvailable"/>
+            <input class="create-data-input" type="number" id="quantityAvailable" name="quantityAvailable" value="${product.price}"/>
             <label for="quantityAvailable"> Quantity Available : </label>
             <span class="error-message" id="quantityAvailable-error"></span>
         </fieldset>
         <fieldset class="input-field">
-            <input class="create-data-input" type="text" id="image" name="image"/>
+            <input class="create-data-input" type="text" id="image" name="image" value="${product.image}"/>
             <label for="image">Image URL (must start with http/https):</label>
             <span class="error-message" id="image-error"></span>
         </fieldset>
@@ -42,11 +41,6 @@ export const createTemplate = () => html`
                 <option class="category-option" value="detailing">Car Detailing</option>
                 <option class="category-option" value="other">Other</option>
             </select>
-            // <div class="other-input" id="category-other-input">
-            //     <input class="create-data-input" type="text" id="category" name="category"/>
-            //     <label for="category">Specify the product category:</label>
-            //     <span class="error-message" id="category-error"></span>
-            // </div>
         </fieldset>
         <fieldset class="select-field">
             <label for="subcategory">Product Sub-category</label>
@@ -81,7 +75,8 @@ export const createTemplate = () => html`
                 <span class="error-message" id="forCar-error"></span>
             </div>
         </fieldset>
-        <button id="create-btn">Create</button>
+        <button id="edit-btn">Edit</button>
+        <button id="cancel-btn">Cancel</button>
 </form>
 </section>
 `

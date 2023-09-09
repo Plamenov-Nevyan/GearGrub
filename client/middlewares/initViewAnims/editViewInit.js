@@ -1,39 +1,50 @@
 import {authOperations} from "../../utils/authOperations.js"
 
-export function createViewInit(ctx){
+export function editViewInit(ctx){
 
-let createData = {
-    name: '',
-    description: '',
-    price: '',
-    quantityAvailable: '',
-    image: '',
-    category: '',
-    subcategory: '',
-    forCar: '',
+let editData = {
+    name: ctx.product.name,
+    description: ctx.product.description,
+    price: ctx.product.price,
+    quantityAvailable: ctx.product.quantityAvailable,
+    image: ctx.product.image,
+    category: ctx.product.category,
+    subcategory: ctx.product.subcategory,
+    forCar: ctx.product.forCar,
     owner: authOperations.getUserId()
 }
 $(document).ready(function(){
     let categorySelected = $('select#category').find(":selected").val()
     let subcategoryOptions = subcategoriesTemplates(categorySelected)
 
+    $('#cancel-btn').on('click', function(e){
+        e.preventDefault()
+        ctx.page.redirect(`/details/${ctx.productId}`)
+    })
+
     $('.create-form').on('submit', async (e) => {
         e.preventDefault()
-        let isThereErrors = ctx.checkForErrors(createData)
-        if(isThereErrors){return}
-        try {
-            let createDataSanitized = {...sanitizeCreateData(createData)}
-            let newProductId = await ctx.createNewProduct(createDataSanitized)
-            ctx.page.redirect(`/details/${newProductId}`)
-        }catch(err){
-            alert(err)
+        let confirmEdit = confirm('Are you sure you want to edit this product offer ?')
+        if(confirmEdit){
+            let isThereErrors = ctx.checkForErrors(editData)
+            if(isThereErrors){return}
+            try {
+                console.log(editData.price)
+                let editDataSanitized = {...sanitizeEditData(editData)}
+                let updatedProductId = await ctx.updateProduct(editDataSanitized, ctx.productId)
+                ctx.page.redirect(`/details/${updatedProductId}`)
+            }catch(err){
+                alert(err)
+            }
+        }else {
+            return
         }
     })
     $('select#subcategory').append(subcategoryOptions)
 
     $('.create-data-input').each(function(){
         $(this).on('change', function(e){
-            createData[$(this).attr('id')] = $(this).val()
+            editData[$(this).attr('id')] = $(this).val()
         })
         $(this).on('focus',function(){
             if($(this).hasClass('error')){
@@ -43,20 +54,22 @@ $(document).ready(function(){
         })
     })
     
-    function sanitizeCreateData(createData){
-        createData.description = createData.description.trim()
-        createData.name = createData.name.trim()
-        createData.subcategory = createData.subcategory.trim()
-        createData.price = createData.price.trim()
-        createData.image = createData.image.trim()
-        createData.forCar = createData.forCar.trim()
-        return createData
+    function sanitizeEditData(editData){
+        let editDataSanitized = {...editData}
+        editDataSanitized.description = editDataSanitized.description.trim()
+        editDataSanitized.name = editDataSanitized.name.trim()
+        editDataSanitized.subcategory = editDataSanitized.subcategory.trim()
+        editDataSanitized.price = editDataSanitized.price.trim()
+        editDataSanitized.price = Number(editDataSanitized.price)
+        editDataSanitized.image = editDataSanitized.image.trim()
+        editDataSanitized.forCar = editDataSanitized.forCar.trim()
+        return editDataSanitized
     }
 
 
     $('select#category').on('change', function(e){
         categorySelected = $(this).find(":selected").val()
-        createData[category] = categorySelected
+        editData[category] = categorySelected
         let subcategoryOptions = subcategoriesTemplates(categorySelected)
         $('select#subcategory').empty()
         $('select#subcategory').append(subcategoryOptions)
@@ -67,7 +80,7 @@ $(document).ready(function(){
     
     $('select#subcategory').on('change', function(e){
         let subcategorySelected = $(this).find(":selected").val()
-        createData[subcategory] = subcategorySelected
+        editData[subcategory] = subcategorySelected
 
         if(subcategorySelected !== 'other'){
             if($('#subcategory-other-input').css('display') !== 'none'){
@@ -80,7 +93,7 @@ $(document).ready(function(){
 
     $('select#forCar').on('change', function(e){
         let forCarSelected = $(this).find(":selected").val()
-        createData[forCar] = forCarSelected
+        editData[forCar] = forCarSelected
 
         if(forCarSelected !== 'other'){
             if($('#forCar-other-input').css('display') !== 'none'){

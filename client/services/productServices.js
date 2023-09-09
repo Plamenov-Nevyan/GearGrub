@@ -42,3 +42,10 @@ export const deleteProduct = async (productId) => {
     let query = `delete=deleteProduct&productId=${productId}`
     await apiRequests.del(null, query)
 }
+
+export async function editProduct(productData, productId){
+    productData.action = "editProduct"
+    let query = `productId=${productId}`
+    let updatedProductId = await apiRequests.post(productData, query)
+    return updatedProductId
+}

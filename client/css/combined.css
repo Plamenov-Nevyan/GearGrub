@@ -636,6 +636,10 @@ header nav ul li a {
   color: azure;
   padding: 0.4em 1em;
   width: 100%;
+  opacity: 0.3;
+}
+.create-section form #description-field textarea:focus {
+  opacity: 1;
 }
 .create-section form #description-field label {
   top: 1em;

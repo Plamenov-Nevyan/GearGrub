@@ -90,6 +90,17 @@ class ProductManagement extends Database {
         }
     }
 
+    public function updateProduct($data, $productId){
+        try {
+            $this->checkForCreateDataErrors($data);
+            $updatedProductId = $this->editProduct($data, $productId);
+            return $updatedProductId;
+            exit;
+        }catch(Exception $error){
+            throw $error;
+        }
+    }
+
     private function checkForCreateDataErrors($data){
         if(empty($data["name"]) || strlen($data["name"]) < 4){
             throw new Exception('Product name must be at least 4 characters long!');
@@ -139,6 +150,49 @@ class ProductManagement extends Database {
         $statement = null;
         return $productId;
         exit;
+    }
+
+    private function editProduct($data, $productId){
+        $pdo = $this->connect();
+        $query = "UPDATE products SET 
+        name = :name, 
+        description = :description,
+        category = :category,
+        subcategory = :subcategory,
+        forCar = :forCar,
+        price = :price,
+        quantityAvailable = :quantityAvailable,
+        image = :image
+        WHERE id = :productId";
+        
+        // Prepare and execute the UPDATE statement
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(":name", $data["name"]);
+        $statement->bindParam(":description", $data["description"]);
+        $statement->bindParam(":category", $data["category"]);
+        $statement->bindParam(":subcategory", $data["subcategory"]);
+        $statement->bindParam(":forCar", $data["forCar"]);
+        $statement->bindParam(":price", $data["price"]);
+        $statement->bindParam(":quantityAvailable", $data["quantityAvailable"]);
+        $statement->bindParam(":image", $data["image"]);
+        $statement->bindParam(":productId", $productId);
+        $statement->execute();
+        $product = null;
+        // Check if the UPDATE was successful
+        if ($statement->rowCount() > 0) {
+            // If the UPDATE was successful, fetch the updated product data
+            $retrieveQuery = "SELECT * FROM products WHERE id = :productId";
+            $retrieveStatement = $pdo->prepare($retrieveQuery);
+            $retrieveStatement->bindParam(":productId", $productId);
+            $retrieveStatement->execute();
+            $product = $retrieveStatement->fetch(PDO::FETCH_ASSOC);
+        } else {
+            // Handle the case where the UPDATE didn't affect any rows
+            throw new Exception('Update product failed !');
+        }
+        $pdo = null;
+        $statement = null;
+        return $product["id"];
     }
 
     public function deletePublication($productId){

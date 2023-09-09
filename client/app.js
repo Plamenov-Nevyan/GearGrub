@@ -19,6 +19,9 @@ import {preloadCreateData} from "./middlewares/viewPreloads/createPreload.js";
 import {preloadDetailsData} from "./middlewares/viewPreloads/detailsPreload.js";
 import {detailsView} from "./views/detailsView.js";
 import {detailsViewInit} from "./middlewares/initViewAnims/detailsViewInit.js";
+import {preloadEditData} from "./middlewares/viewPreloads/editPreload.js";
+import {editView} from "./views/editView.js";
+import {editViewInit} from "./middlewares/initViewAnims/editViewInit.js";
 
 page(renderMiddleware)
 page(navMiddleware)
@@ -29,4 +32,5 @@ page('/logout', logout)
 page('/catalog', preloadCatalogData, catalogView, catalogViewInit)
 page('/create-offer', preloadCreateData, createView, createViewInit)
 page ('/details/:productId', preloadDetailsData, detailsView, detailsViewInit)
+page('/edit/:productId', preloadEditData, editView, editViewInit)
 page.start()

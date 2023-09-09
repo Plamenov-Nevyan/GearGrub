@@ -9,6 +9,10 @@ export async function detailsViewInit(ctx){
                 return
             }
         })
+
+        $('#edit-btn').on('click', function(){
+          ctx.page.redirect(`/edit/${ctx.productId}`)
+        })
     }
   })
 }
