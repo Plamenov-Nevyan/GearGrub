@@ -1,8 +1,17 @@
 import { html, nothing } from "../node_modules/lit-html/lit-html.js"
 
-export const catalogTemplate = () => html`
+export const catalogTemplate = (vehicle) => html`
 <section class="catalog-section">
-<h1>GearGrub's catalog</h1>
+<h1>GearGrub's catalog
+    ${ vehicle
+        ? html`<span>Showing results for ${vehicle}</span>`
+        :nothing
+    }
+</h1>
+${ vehicle
+    ? html `<button id="clear-vehicle-selection">Clear Vehicle Selection</button>`
+    : nothing
+}
 <article class="sidebar">
     <div class="sidebar-top">
         <h3>Categories</h3>
@@ -23,6 +32,7 @@ export const catalogTemplate = () => html`
             <li class="category-li" id="accessories">Accessories and Equipment</li>
             <li class="category-li" id="tools">Tools</li>
             <li class="category-li" id="detailing">Car Detailing</li>
+            <li class="category-li" id="other">Other</li>
         </ul>
     </div>
 </article>

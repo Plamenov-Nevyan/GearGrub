@@ -35,9 +35,6 @@ export const navTemplateUser = () => html`
     <a href="/catalog" id="catalog-link">Catalog</a>
     </li>
     <li>
-    <a href="/my-profile" id="profile-link">My Profile</a>
-    </li>
-    <li>
     <a href="/logout" id="logout-btn">Logout<a>
     </li>
 </ul>
@@ -55,9 +52,6 @@ export const navTemplateMod = (isAdminOrOwner) => html`
     </li>
     <li>
        <a href="/catalog" id="catalog-link">Catalog</a>
-    </li>
-    <li>
-    <a href="/my-profile" id="profile-link">My Profile</a>
     </li>
     <li>
     <a href="/adm-dashboard" id="dashboard-link">Admin Dashboard</a>

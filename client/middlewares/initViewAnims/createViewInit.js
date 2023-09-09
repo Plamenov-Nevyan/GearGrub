@@ -16,14 +16,15 @@ let createData = {
 $(document).ready(function(){
     let categorySelected = $('select#category').find(":selected").val()
     let subcategoryOptions = subcategoriesTemplates(categorySelected)
+
     $('.create-form').on('submit', async (e) => {
         e.preventDefault()
         let isThereErrors = ctx.checkForErrors(createData)
         if(isThereErrors){return}
         try {
-            createData.description = createData.description.trim()
-            let newProductId = await ctx.createNewProduct(createData)
-        console.log(newProductId)
+            let createDataSanitized = {...sanitizeCreateData(createData)}
+            let newProductId = await ctx.createNewProduct(createDataSanitized)
+            ctx.page.redirect(`/details/${newProductId}`)
         }catch(err){
             alert(err)
         }
@@ -42,25 +43,25 @@ $(document).ready(function(){
         })
     })
     
+    function sanitizeCreateData(createData){
+        createData.description = createData.description.trim()
+        createData.name = createData.name.trim()
+        createData.subcategory = createData.subcategory.trim()
+        createData.price = createData.price.trim()
+        createData.image = createData.image.trim()
+        createData.forCar = createData.forCar.trim()
+        return createData
+    }
 
 
     $('select#category').on('change', function(e){
         categorySelected = $(this).find(":selected").val()
         createData[category] = categorySelected
-
-        if(categorySelected !== 'other'){
-            let subcategoryOptions = subcategoriesTemplates(categorySelected)
-            $('select#subcategory').empty()
-            $('select#subcategory').append(subcategoryOptions)
-            if($('#category-other-input').css('display') !== 'none'){
-                $('#category-other-input').slideUp('fast')
-                $('#subcategory-other-input').slideUp('fast')
-            }
-        }else {
-            $('#category-other-input').slideDown('fast')
-            $('#subcategory-other-input').slideDown('fast')
-            $('select#subcategory').empty()
-            $('select#subcategory').append('<option class="subcategory-option" value="other">Other</option>')
+        let subcategoryOptions = subcategoriesTemplates(categorySelected)
+        $('select#subcategory').empty()
+        $('select#subcategory').append(subcategoryOptions)
+        if($('#subcategory-other-input').css('display') !== 'none'){
+            $('#subcategory-other-input').slideUp('fast')
         }
     })
     
@@ -96,7 +97,7 @@ $(document).ready(function(){
 function subcategoriesTemplates(showSubcategoriesFor){
     if(showSubcategoriesFor === 'carParts'){
         return`
-            <option class="subcategory-option" value="engine">Engine</option>
+            <option class="subcategory-option" value="engine" selected>Engine</option>
             <option class="subcategory-option" value="exhaustSystem">Exhaust System</option>
             <option class="subcategory-option" value="filters">Filters</option>
             <option class="subcategory-option" value="brakeSystem">Brake System</option>
@@ -112,7 +113,7 @@ function subcategoriesTemplates(showSubcategoriesFor){
         `
     }else if(showSubcategoriesFor === 'oilsAndFluids'){
         return`
-            <option class="subcategory-option" value="engineOil">Engine Oil</option>
+            <option class="subcategory-option" value="engineOil" selected>Engine Oil</option>
             <option class="subcategory-option" value="transmissionOil">Transmission Oil</option>
             <option class="subcategory-option" value="lubricants">Lubricants</option>
             <option class="subcategory-option" value="brakeFluid">Brake Fluid</option>
@@ -127,7 +128,7 @@ function subcategoriesTemplates(showSubcategoriesFor){
         `
     }else if(showSubcategoriesFor === 'accessories'){
         return`
-            <option class="subcategory-option" value="mats">Floor and Trunk mats</option>
+            <option class="subcategory-option" value="mats" selected>Floor and Trunk mats</option>
             <option class="subcategory-option" value="batteryChargers">Battery Chargers</option>
             <option class="subcategory-option" value="jumpstartCables">Jumpstart Cables</option>
             <option class="subcategory-option" value="towbars">Towbars</option>
@@ -143,7 +144,7 @@ function subcategoriesTemplates(showSubcategoriesFor){
         `
     }else if(showSubcategoriesFor === 'tools'){
         return`
-            <option class="subcategory-option" value="handTools">Hand Tools</option>
+            <option class="subcategory-option" value="handTools" selected>Hand Tools</option>
             <option class="subcategory-option" value="vhServiceTools">Vehicle Service Tools</option>
             <option class="subcategory-option" value="electricTools">Electric Tools</option>
             <option class="subcategory-option" value="pneumaticTools">Pneumatic Tools</option>
@@ -151,7 +152,7 @@ function subcategoriesTemplates(showSubcategoriesFor){
         `
     }else if(showSubcategoriesFor === 'detailing'){
         return `
-            <option class="subcategory-option" value="exteriorCare">Exterior Care and Detaioptionng</option>
+            <option class="subcategory-option" value="exteriorCare" selected>Exterior Care and Detaioptionng</option>
             <option class="subcategory-option" value="interiorCare">Interior Care and Detaioptionng</option>
             <option class="subcategory-option" value="glassCleaning">Glass Cleaning and Protection</option>
             <option class="subcategory-option" value="waxingAndPolishing">Waxing and Polishing</option>
@@ -160,5 +161,4 @@ function subcategoriesTemplates(showSubcategoriesFor){
         `
     }
 }
-
 }

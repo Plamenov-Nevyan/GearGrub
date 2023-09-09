@@ -12,7 +12,6 @@ export function createValidator(inputValues){
     errors.image = inputValues.image.startsWith('http') || inputValues.image.startsWith('https')
     ? ''
     : 'Please provide a valid link for the product image !'
-    errors.category = inputValues.category !== 'other' ? '' : 'Please specify the product cathegory !'
     errors.subcategory = inputValues.subcategory !== 'other' ? '' : 'Please specify the product subcategory !' 
     errors.forCar = inputValues.forCar !== 'other' ? '' : 'Please specify for which car brand this product is !' 
     return errors
@@ -22,7 +21,7 @@ export function createValidator(inputValues){
         Object.entries(inputValues).forEach(([key, value]) => {
             if(value === ''){
                 if(key === 'forCar'){errors[key] = `Please select a car brand for this product !` }
-                else if(key === 'category' || key === 'subcategory'){errors[key] = `Please select a ${key} for this product !` }
+                else if(key === 'subcategory'){errors[key] = `Please select a ${key} for this product !` }
                 else {
                     errors[key] = `Please fill the required ${key} field !` 
                 }

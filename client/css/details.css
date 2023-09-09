@@ -1,0 +1,63 @@
+.details-section {
+  width: 98vw;
+  height: 100vh;
+  display: flex;
+  margin-top: 1em;
+  gap: 2em;
+  padding: 0.5em;
+}
+.details-section .left-part, .details-section .right-part {
+  flex: 1 1 50%;
+}
+.details-section .left-part {
+  border-radius: 3.8em;
+  overflow: hidden;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.details-section .left-part img {
+  width: 100%;
+  height: auto;
+}
+.details-section .right-part {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.details-section .right-part .text-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  padding: 0.5em;
+}
+.details-section .right-part .text-top h1 {
+  flex: 1 1 100%;
+  text-align: center;
+}
+.details-section .right-part .text-top h4 {
+  flex: 1 1 33%;
+  text-align: center;
+}
+.details-section .right-part .description {
+  max-width: 90%;
+  padding: 0.5em;
+}
+.details-section .right-part .description p {
+  width: 100%;
+  text-align: justify;
+}
+.details-section .right-part .owner-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  padding: 0.5em;
+}
+.details-section .right-part .owner-info h4 {
+  flex: 1 1 33%;
+  text-align: center;
+}
+.details-section .right-part #add-to-cart-btn {
+  max-width: 20%;
+  padding: 0.5em 1em;
+  margin-left: auto;
+}/*# sourceMappingURL=details.css.map */

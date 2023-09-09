@@ -34,13 +34,24 @@ class ProductManagement extends Database {
         }
     }
 
-    public function getProductsFromSubcategory($category, $subcategory){
+    public function getProductsFromSubcategory($category, $subcategory, $forCar){
         try {
-            $pdo = $this->connect();
-            $query = "SELECT id, name, image, price FROM products WHERE category = :productCategory AND subcategory = :productSubcategory";
-            $statement = $pdo->prepare($query);
-            $statement->bindParam('productCategory', $category);
-            $statement->bindParam('productSubcategory', $subcategory);
+            $query = null;
+            $statement = null;
+            if($forCar){
+                $pdo = $this->connect();
+                $query = "SELECT id, name, image, price FROM products WHERE category = :productCategory AND subcategory = :productSubcategory AND forCar = :productForCar";
+                $statement = $pdo->prepare($query);
+                $statement->bindParam('productCategory', $category);
+                $statement->bindParam('productSubcategory', $subcategory);
+                $statement->bindParam('productForCar', $forCar);
+            }else{
+                $pdo = $this->connect();
+                $query = "SELECT id, name, image, price FROM products WHERE category = :productCategory AND subcategory = :productSubcategory";
+                $statement = $pdo->prepare($query);
+                $statement->bindParam('productCategory', $category);
+                $statement->bindParam('productSubcategory', $subcategory);
+            }
             $statement->execute();
             $products = $statement->fetchAll(PDO::FETCH_ASSOC);
             $pdo= null;
@@ -50,6 +61,22 @@ class ProductManagement extends Database {
         }catch(Exception $error){
             throw $error;
         }
+    }
+
+    public function getProductDetails($productId){
+        $pdo = $this->connect();
+        $query= "SELECT products.*, users.username AS owner_username, users.email AS owner_email, users.phone AS owner_phone, users.id AS owner_id
+                 FROM products
+                 INNER JOIN users ON products.owner = users.id
+                 WHERE products.id = :productId";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam('productId', $productId);
+        $statement->execute();
+        $product = $statement->fetch(PDO::FETCH_ASSOC);
+        $pdo = null;
+        $statement = null;
+        return $product;
+        exit;
     }
 
     public function createProduct($data){
@@ -85,11 +112,10 @@ class ProductManagement extends Database {
         ){
             throw new Exception('Please provide a valid link for product image (must start with http or https)');
         }else if(
-                $data["category"] === 'other' ||
                 $data["subcategory"] === 'other'||
                 $data["forCar"] === 'other'
         ){
-            throw new Exception('Please select product category, sub-category and car brand designation');
+            throw new Exception('Please select product sub-category and car brand designation');
         }
     }
 

@@ -481,7 +481,28 @@ header nav ul li a {
   gap: 0.6em;
 }
 .catalog-section h1 {
-  flex: 1 1 100%;
+  flex: 1 1 80%;
+}
+.catalog-section h1 span {
+  font-size: 1rem;
+  font-style: italic;
+  padding: 0.5em;
+  background: aquamarine;
+  border-radius: 0.6em;
+}
+.catalog-section #clear-vehicle-selection {
+  padding: 1em;
+  border-radius: 0.6em;
+  border: none;
+  outline: none;
+  background: black;
+  color: azure;
+  cursor: pointer;
+  transition: ease-in-out 200ms;
+}
+.catalog-section #clear-vehicle-selection:hover {
+  background-color: darkgray;
+  color: azure;
 }
 .catalog-section .sidebar {
   flex: 1 1 20%;
@@ -548,16 +569,21 @@ header nav ul li a {
 .catalog-section .items-container {
   flex: 1 1 60%;
   display: grid;
-  grid-template-columns: minmax(100px, 200px) 1fr 1fr;
+  grid-template-columns: minmax(20em, 20em) 2fr 2fr;
   grid-gap: 2em;
   padding: 1em;
 }
 .catalog-section .items-container .card {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   gap: 1em;
+}
+.catalog-section .items-container .card img {
+  width: 100%;
+  height: auto;
 }
 
 .create-section {
@@ -669,4 +695,68 @@ header nav ul li a {
 }
 .create-section form fieldset.select-field .other-input label {
   top: 0;
+}
+
+.details-section {
+  width: 98vw;
+  height: 100vh;
+  display: flex;
+  margin-top: 1em;
+  gap: 2em;
+  padding: 0.5em;
+}
+.details-section .left-part, .details-section .right-part {
+  flex: 1 1 50%;
+}
+.details-section .left-part {
+  border-radius: 3.8em;
+  overflow: hidden;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.details-section .left-part img {
+  width: 100%;
+  height: auto;
+}
+.details-section .right-part {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.details-section .right-part .text-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  padding: 0.5em;
+}
+.details-section .right-part .text-top h1 {
+  flex: 1 1 100%;
+  text-align: center;
+}
+.details-section .right-part .text-top h4 {
+  flex: 1 1 33%;
+  text-align: center;
+}
+.details-section .right-part .description {
+  max-width: 90%;
+  padding: 0.5em;
+}
+.details-section .right-part .description p {
+  width: 100%;
+  text-align: justify;
+}
+.details-section .right-part .owner-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  padding: 0.5em;
+}
+.details-section .right-part .owner-info h4 {
+  flex: 1 1 33%;
+  text-align: center;
+}
+.details-section .right-part #add-to-cart-btn {
+  max-width: 20%;
+  padding: 0.5em 1em;
+  margin-left: auto;
 }/*# sourceMappingURL=combined.css.map */

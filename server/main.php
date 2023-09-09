@@ -61,10 +61,12 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     if(isset($_GET["category"]) && isset($_GET["subcategory"])){
         require_once "includes/getProductsHandler.php";
         require_once "Classes/Product.php";
+        $forCar = null;
         $category = $_GET["category"];
         $subcategory = $_GET["subcategory"];
+        if(isset($_GET["forCar"])){$forCar = $_GET["forCar"];};
         try{
-            $products = getProductsFromSubcategory($category, $subcategory);
+            $products = getProductsFromSubcategory($category, $subcategory, $forCar);
             $productsToSend = array();
             foreach($products as $product){
                 $currentProduct = new Product(
@@ -87,10 +89,12 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         }
 
     }else if(isset($_GET["forCar"]) || isset($_GET["category"])){
+        $category = null;
+        $forCar = null;
         require_once "includes/getProductsHandler.php";
         require_once "Classes/Product.php";
-        $forCar = $_GET["forCar"] || null;
-        $category = $_GET["category"] || null;
+        if(isset($_GET["forCar"])){$forCar = $_GET["forCar"];};
+        $category = $_GET["category"];
         try {
             $products = getProducts($forCar, $category);
             $productsToSend = array();
@@ -113,6 +117,52 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             exit;
         }catch(Exception $error){
             echo 'Error' . $error->getMessage();
+        }
+    }else if(isset($_GET["productId"])){
+        require_once "includes/getProductsHandler.php";
+        require_once "Classes/Product.php";
+        $productId = $_GET["productId"];
+        try{
+            $product = getProductDetails($productId);
+            $productToSend = array();
+            $currentProduct = new Product(
+                $product["id"],
+                $product["name"],
+                $product["image"],
+                $product["price"],
+                $product["category"],
+                $product["description"],
+                $product["subcategory"],
+                $product["forCar"],
+                $product["quantityAvailable"],
+                $product["created_at"],
+                $product["owner_username"],
+                $product["owner_email"],
+                $product["owner_phone"],
+                $product["owner_id"],
+            );
+            $productToSend[] = array(
+                'id' => $currentProduct->getId(),
+                'name' => $currentProduct->getName(),
+                'description' => $currentProduct->getDescription(),
+                'category' => $currentProduct->getCategory(),
+                'subcategory' => $currentProduct->getSubcategory(),
+                'forCar' => $currentProduct->getForCar(),
+                'price' => $currentProduct->getPrice(),
+                'quantityAvailable' => $currentProduct->getQuantityAvailable(),
+                'image' => $currentProduct->getImage(),
+                'created_at' => $currentProduct->getCreatedAt(),
+                'owner_username' => $currentProduct->getOwnerUsername(),
+                'owner_email' => $currentProduct->getOwnerEmail(),
+                'owner_phone' => $currentProduct->getOwnerPhone(),
+                'owner_id' => $currentProduct->getOwnerId(),
+            );
+            
+            header("Content-Type: application/json");
+            echo json_encode($product);
+            exit;
+        }catch(Exception $error){
+            echo 'Error: ' . $error->getMessage();
         }
     }
 }

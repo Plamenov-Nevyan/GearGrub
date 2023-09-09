@@ -11,7 +11,9 @@ class Product {
    private $quantityAvailable;
    private $image;
    private $created_at;
-   private $owner;
+   private $owner_username;
+   private $owner_email;
+   private $owner_phone;
 
    public function __construct(
     $id,
@@ -24,7 +26,10 @@ class Product {
     $forCar = null, 
     $quantityAvailable = null, 
     $created_at = null,
-    $owner = null
+    $owner_username = null,
+    $owner_email = null,
+    $owner_phone = null,
+    $owner_id = null,
     ){
      $this->id = $id;
      $this->name = $name;
@@ -36,7 +41,10 @@ class Product {
      $this->quantityAvailable = $quantityAvailable;
      $this->image = $image;
      $this->created_at = $created_at;
-     $this->owner = $owner;
+     $this->owner_username = $owner_username;
+     $this->owner_email = $owner_email;
+     $this->owner_phone = $owner_phone;
+     $this->owner_id = $owner_id;
    }
 
 public function getId(){
@@ -103,10 +111,28 @@ public function getCreatedAt(){
 public function setCreatedAt($created_at){
     $this->created_at = $created_at;
 }
-public function getOwner(){
-    return $this->owner;
+public function getOwnerUsername(){
+    return $this->owner_username;
 }
-public function setOwner($owner){
-    $this->owner = $owner;
+public function setOwnerUsername($owner_username){
+    $this->owner_username = $owner_username;
+}
+public function getOwnerEmail(){
+    return $this->owner_email;
+}
+public function setOwnerEmail($owner_email){
+    $this->owner_email = $owner_email;
+}
+public function getOwnerPhone(){
+    return $this->owner_phone;
+}
+public function setOwnerPhone($owner_phone){
+    $this->owner_phone = $owner_phone;
+}
+public function getOwnerId(){
+    return $this->owner_id;
+}
+public function setOwnerId($owner_id){
+    $this->owner_id = $owner_id;
 }
 }

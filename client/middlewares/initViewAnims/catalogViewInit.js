@@ -1,6 +1,8 @@
 export async function catalogViewInit(ctx){
 let showSubcategoriesFor = ctx.category ? ctx.category : null
 let searchVehicleData = localStorage.getItem('searchVehicleData')
+attachClassEventsForCategories()
+attachClassEventsForSubcategories()
 if(showSubcategoriesFor){
     let showSubcategoriesTemplate = subcategoriesTemplates(showSubcategoriesFor)
     $('.subcategories-list').empty()
@@ -8,28 +10,6 @@ if(showSubcategoriesFor){
     $('.sidebar-top').slideDown('fast')
     $('.sidebar-middle').slideDown('fast')
     $('.line-divider').slideDown('fast')
-    attachClassEventsForSubcategories()
-    if(!searchVehicleData){
-        let products = await searchForCategories(showSubcategoriesFor)
-        if(products.length > 0){
-            $('.items-container').children().detach()
-            if(ctx.products.length > 0){
-                ctx.products.forEach(product => {
-                    let productCard = $(`
-                    <div class="card">
-                        <img src="${product.image}" />
-                        <h5>${product.name}</h5>
-                        <h6>${product.price}</h6>
-                    </div>
-                    `)
-                    $('.items-container').append(productCard)
-                })
-            }else {
-                let noProductsMessage = $('<h1>No products in this category for sale yet...</h1>')
-                $('.items-container').append(noProductsMessage)
-            }
-        }
-    }
     $('.subcategory-li').each(function(){
         $(this).on('click', async function(e){
             let products = await searchForSubcategories(e)
@@ -38,12 +18,15 @@ if(showSubcategoriesFor){
                 if(ctx.products.length > 0){
                     ctx.products.forEach(product => {
                         let productCard = $(`
-                        <div class="card">
+                        <div class="card" id=${product.id}>
                             <img src="${product.image}" />
                             <h5>${product.name}</h5>
                             <h6>${product.price}</h6>
                         </div>
                         `)
+                        $(productCard).on('click', function(e){
+                            ctx.page.redirect(`/details/${$(this).attr('id')}`)
+                        })
                         $('.items-container').append(productCard)
                     })
                 }else {
@@ -53,42 +36,46 @@ if(showSubcategoriesFor){
             }
         })
     })
+    attachClassEventsForCategories()
 }
-attachClassEventsForCategories()
 
 $('.category-li').each(function(){
     $(this).on('click', async function(e){
         showSubcategoriesFor = $(this).attr('id')
         let showSubcategoriesTemplate = subcategoriesTemplates($(this).attr('id'))
+        console.log(showSubcategoriesTemplate)
         $('.subcategories-list').empty()
         $('.subcategories-list').append(showSubcategoriesTemplate)
+        $('.sidebar-top').slideDown('fast')
+        $('.sidebar-middle').slideDown('fast')
+        $('.line-divider').slideDown('fast')
         attachClassEventsForSubcategories()
+        $('.items-container').empty()
         let products = await searchForCategories(e)
         if(products.length > 0){
-            $('.items-container').children().detach()
-            if(ctx.products.length > 0){
-                ctx.products.forEach(product => {
-                    let productCard = $(`
-                    <div class="card">
-                        <img src="${product.image}" />
-                        <h5>${product.name}</h5>
-                        <h6>${product.price}</h6>
-                    </div>
-                    `)
-                    $('.items-container').append(productCard)
+            products.forEach(product => {
+                let productCard = $(`
+                <div class="card" id=${product.id}>
+                    <img src="${product.image}" />
+                    <h5>${product.name}</h5>
+                    <h6>${product.price}</h6>
+                </div>
+                `)
+                $(productCard).on('click', function(e){
+                    ctx.page.redirect(`/details/${$(this).attr('id')}`)
                 })
+                $('.items-container').append(productCard)
+            })
             }else {
                 let noProductsMessage = $('<h1>No products in this category for sale yet...</h1>')
                 $('.items-container').append(noProductsMessage)
             }
-        }
         $('.subcategory-li').each(function(){
             $(this).on('click', async function(e){
                 let products = await searchForSubcategories(e)
+                $('.items-container').empty()
                 if(products.length > 0){
-                    $('.items-container').children().detach()
-                    if(ctx.products.length > 0){
-                        ctx.products.forEach(product => {
+                        products.forEach(product => {
                             let productCard = $(`
                             <div class="card">
                                 <img src="${product.image}" />
@@ -96,21 +83,26 @@ $('.category-li').each(function(){
                                 <h6>${product.price}</h6>
                             </div>
                             `)
+                            $(productCard).on('click', function(e){
+                                ctx.page.redirect(`/details/${$(this).attr('id')}`)
+                            })
                             $('.items-container').append(productCard)
                         })
                     }else {
                         let noProductsMessage = $('<h1>No products in this category for sale yet...</h1>')
                         $('.items-container').append(noProductsMessage)
                     }
-                }
             })
         })
     })
 })
 
+$('#clear-vehicle-selection').on('click', function(){
+    localStorage.removeItem('searchVehicleData')
+    ctx.page.redirect('/catalog')
+})
 
 function attachClassEventsForCategories(){
-
     $('.category-li').each(function(){
         if($(this).attr('id') === showSubcategoriesFor){
             $(this).addClass('active-category')
@@ -145,7 +137,7 @@ function attachClassEventsForSubcategories(){
 function subcategoriesTemplates(showSubcategoriesFor){
     if(showSubcategoriesFor === 'carParts'){
         return`
-        <li class="subcategory-li" id="engine">Engine</li>
+            <li class="subcategory-li" id="engine">Engine</li>
             <li class="subcategory-li" id="exhaustSystem">Exhaust System</li>
             <li class="subcategory-li" id="filters">Filters</li>
             <li class="subcategory-li" id="brakeSystem">Brake System</li>
@@ -206,12 +198,14 @@ function subcategoriesTemplates(showSubcategoriesFor){
 }
 
 async function searchForCategories(e){
-    let products = await ctx.searchFromCategory($(e.target).attr('id'))
+    let forCar = searchVehicleData ? JSON.parse(searchVehicleData).forCar : null
+    let products = await ctx.searchFromCategory($(e.target).attr('id'), forCar)
     return products
 }
 
 async function searchForSubcategories(e){
-    let products = await ctx.searchFromSubcategory(showSubcategoriesFor, $(e.target).attr('id'))
+    let forCar = searchVehicleData ? JSON.parse(searchVehicleData).forCar : null
+    let products = await ctx.searchFromSubcategory(showSubcategoriesFor, $(e.target).attr('id'), forCar)
     return products
 }
 

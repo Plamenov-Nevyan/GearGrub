@@ -1,0 +1,65 @@
+.details-section {
+    width: 98vw;
+    height: 100vh;
+    display: flex;
+    margin-top: 1em;
+    gap: 2em;
+    padding: 0.5em;
+    .left-part, .right-part {
+        flex: 1 1 50%;
+    }
+
+    .left-part {
+        border-radius: 3.8em;
+        overflow: hidden;
+        height: fit-content;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .right-part {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        .text-top {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6em;
+            padding: 0.5em;
+            h1 {
+                flex: 1 1 100%;
+                text-align: center;
+
+            }
+            h4{
+                flex: 1 1 33%;
+                text-align: center;
+            }
+        }
+        .description {
+            max-width: 90%;
+            padding: 0.5em; 
+            p {
+                width: 100%;
+                text-align: justify;
+            }       
+        }
+        .owner-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6em;
+            padding: 0.5em;
+            h4{
+                flex: 1 1 33%;
+                text-align: center;
+            }
+        }
+        #add-to-cart-btn {
+            max-width: 20%;
+            padding: 0.5em 1em;
+            margin-left: auto;
+        }
+    }
+}

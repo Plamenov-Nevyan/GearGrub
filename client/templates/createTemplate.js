@@ -44,11 +44,11 @@ export const createTemplate = () => html`
                 <option class="category-option" value="detailing">Car Detailing</option>
                 <option class="category-option" value="other">Other</option>
             </select>
-            <div class="other-input" id="category-other-input">
-                <input class="create-data-input" type="text" id="category" name="category"/>
-                <label for="category">Specify the product category:</label>
-                <span class="error-message" id="category-error"></span>
-            </div>
+            // <div class="other-input" id="category-other-input">
+            //     <input class="create-data-input" type="text" id="category" name="category"/>
+            //     <label for="category">Specify the product category:</label>
+            //     <span class="error-message" id="category-error"></span>
+            // </div>
         </fieldset>
         <fieldset class="select-field">
             <label for="subcategory">Product Sub-category</label>

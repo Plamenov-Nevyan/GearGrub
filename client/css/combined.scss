@@ -521,7 +521,28 @@ header {
     padding: 1em;
     gap: 0.6em;
     h1 {
-        flex: 1 1 100%;
+        flex: 1 1 80%;
+        span {
+            font-size: 1rem;
+            font-style: italic;
+            padding: 0.5em;
+            background: aquamarine;
+            border-radius: 0.6em;
+        }
+    }
+    #clear-vehicle-selection {
+        padding: 1em;
+        border-radius: 0.6em;
+        border: none;
+        outline: none;
+        background: black;
+        color: azure;
+        cursor: pointer;
+        transition: ease-in-out 200ms;
+    }
+    #clear-vehicle-selection:hover {
+        background-color: darkgray;
+        color: azure;
     }
     .sidebar {
         flex: 1 1 20%;
@@ -590,15 +611,20 @@ header {
     .items-container {
         flex: 1 1 60%;
         display: grid;
-        grid-template-columns: minmax(100px, 200px) 1fr 1fr;
+        grid-template-columns: minmax(20em, 20em) 2fr 2fr;
         grid-gap: 2em;
         padding: 1em;
         .card {
+            cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
             gap: 1em;
+            img {
+                width: 100%;
+                height: auto;
+            }
         }
     }
 }
@@ -713,6 +739,74 @@ header {
                     top: 0;
                 }
             }
+        }
+    }
+}
+
+            //  DETAILS SECTION 
+
+.details-section {
+    width: 98vw;
+    height: 100vh;
+    display: flex;
+    margin-top: 1em;
+    gap: 2em;
+    padding: 0.5em;
+    .left-part, .right-part {
+        flex: 1 1 50%;
+    }
+
+    .left-part {
+        border-radius: 3.8em;
+        overflow: hidden;
+        height: fit-content;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+
+    .right-part {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        .text-top {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6em;
+            padding: 0.5em;
+            h1 {
+                flex: 1 1 100%;
+                text-align: center;
+
+            }
+            h4{
+                flex: 1 1 33%;
+                text-align: center;
+            }
+        }
+        .description {
+            max-width: 90%;
+            padding: 0.5em; 
+            p {
+                width: 100%;
+                text-align: justify;
+            }       
+        }
+        .owner-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6em;
+            padding: 0.5em;
+            h4{
+                flex: 1 1 33%;
+                text-align: center;
+            }
+        }
+        #add-to-cart-btn {
+            max-width: 20%;
+            padding: 0.5em 1em;
+            margin-left: auto;
         }
     }
 }
