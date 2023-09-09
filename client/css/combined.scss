@@ -83,6 +83,16 @@ header {
             justify-content: center;
             gap: 1em;
             align-items: center;
+            .forCar-input {
+                display: none;
+                label {
+                    color: azure;
+                }
+            }
+            .error {
+                display: none;
+                color: red;
+            }
             select {
                 min-height: 5vh;
                 padding: .4em 1em;

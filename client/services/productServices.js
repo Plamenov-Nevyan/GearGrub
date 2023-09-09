@@ -37,3 +37,8 @@ export async function getProductDetails(productId){
     let product = await apiRequests.get(null, query)
     return product
 }
+
+export const deleteProduct = async (productId) => {
+    let query = `delete=deleteProduct&productId=${productId}`
+    await apiRequests.del(null, query)
+}

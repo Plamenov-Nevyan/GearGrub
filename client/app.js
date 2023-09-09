@@ -18,6 +18,7 @@ import {createViewInit} from "./middlewares/initViewAnims/createViewInit.js";
 import {preloadCreateData} from "./middlewares/viewPreloads/createPreload.js";
 import {preloadDetailsData} from "./middlewares/viewPreloads/detailsPreload.js";
 import {detailsView} from "./views/detailsView.js";
+import {detailsViewInit} from "./middlewares/initViewAnims/detailsViewInit.js";
 
 page(renderMiddleware)
 page(navMiddleware)
@@ -27,5 +28,5 @@ page('/register',preloadRegisterData, registerView, registerViewInit)
 page('/logout', logout)
 page('/catalog', preloadCatalogData, catalogView, catalogViewInit)
 page('/create-offer', preloadCreateData, createView, createViewInit)
-page ('/details/:productId', preloadDetailsData, detailsView)
+page ('/details/:productId', preloadDetailsData, detailsView, detailsViewInit)
 page.start()

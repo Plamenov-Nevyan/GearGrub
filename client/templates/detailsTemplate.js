@@ -29,10 +29,9 @@ export const detailsTemplate = (product, isOwner, isLoggedIn) => html`
     </div>
     ${isLoggedIn
         ? html`<div class="action-btns">
-            <button id="add-to-cart-btn">Add to cart</button>
              ${ isOwner
                 ? createOwnerBtns()
-                : nothing 
+                : html`<button id="add-to-cart-btn">Add to cart</button>` 
             }
          </div>`
         : nothing

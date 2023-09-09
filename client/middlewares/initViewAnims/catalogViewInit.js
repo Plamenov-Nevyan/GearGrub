@@ -37,6 +37,7 @@ if(showSubcategoriesFor){
         })
     })
     attachClassEventsForCategories()
+    attachClassEventsForSubcategories()
 }
 
 $('.category-li').each(function(){

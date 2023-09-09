@@ -55,6 +55,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $action = $_GET["delete"];
         if($action === 'deleteSession'){
             session_destroy();
+        }else if($action === 'deleteProduct' & isset($_GET["productId"])){
+            $productId = $_GET["productId"];
+            require_once "includes/deleteProductHandler.php";
+            try {
+                deleteProduct($productId);
+                echo "Success";
+            }catch(Exception $error){
+                echo 'Error: ' . $error->getMessage();
+            }
         }
     }
 }else if($_SERVER["REQUEST_METHOD"] === "GET"){

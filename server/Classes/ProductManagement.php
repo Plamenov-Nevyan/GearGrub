@@ -140,4 +140,23 @@ class ProductManagement extends Database {
         return $productId;
         exit;
     }
+
+    public function deletePublication($productId){
+        try {
+            $this->deleteProduct($productId);
+        }catch(Exception $error){
+            throw $error;
+        }
+    }
+
+    private function deleteProduct($productId){
+        $pdo = $this->connect();
+        $query = "DELETE FROM products WHERE id = :productId";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam('productId', $productId);
+        $statement->execute();
+        $pdo = null;
+        $statement = null;
+        exit;
+    }
 }

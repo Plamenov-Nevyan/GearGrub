@@ -6,7 +6,6 @@ export async function preloadCatalogData(ctx, next){
     ctx.searchFromSubcategory = searchFromSubcategory
     if(searchVehicleData){
         let dataParsed = JSON.parse(searchVehicleData)
-        console.log(dataParsed)
         ctx.category = dataParsed.category
         try {
             let products = await getProducts( dataParsed.category, dataParsed.forCar)

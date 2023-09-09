@@ -74,6 +74,16 @@ header nav ul li a {
   gap: 1em;
   align-items: center;
 }
+.home-section .advert-1 .search-for-your-vehicle .forCar-input {
+  display: none;
+}
+.home-section .advert-1 .search-for-your-vehicle .forCar-input label {
+  color: azure;
+}
+.home-section .advert-1 .search-for-your-vehicle .error {
+  display: none;
+  color: red;
+}
 .home-section .advert-1 .search-for-your-vehicle select {
   min-height: 5vh;
   padding: 0.4em 1em;

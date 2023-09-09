@@ -35,13 +35,16 @@ export const navTemplateUser = () => html`
     <a href="/catalog" id="catalog-link">Catalog</a>
     </li>
     <li>
+    <a href="/shopping-cart" id="shpping-cart-link">Shopping Cart</a>
+    </li>
+    <li>
     <a href="/logout" id="logout-btn">Logout<a>
     </li>
 </ul>
 </nav>
 `
 
-export const navTemplateMod = (isAdminOrOwner) => html`
+export const navTemplateMod = (userRole) => html`
 <div class="logo-container">
 <img src="static/logo.png" alt="logo"/>
 </div>
@@ -56,9 +59,15 @@ export const navTemplateMod = (isAdminOrOwner) => html`
     <li>
     <a href="/adm-dashboard" id="dashboard-link">Admin Dashboard</a>
     </li>
-    ${isAdminOrOwner
+    ${userRole === 'owner' || userRole === 'admin'
         ? addMakeProductOfferLink()
-        : nothing
+        : userRole === 'moderator' 
+         ? html `
+                <li>
+                    <a href="/shopping-cart" id="shpping-cart-link">Shopping Cart</a>
+                </li>
+                `
+         : nothing
     }
     <li>
     <a href="/logout" id="logout-btn">Logout<a>
