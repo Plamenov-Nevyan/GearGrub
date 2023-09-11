@@ -1,6 +1,6 @@
 import { html, nothing } from "../node_modules/lit-html/lit-html.js"
 
-export const detailsTemplate = (product, isOwner, isLoggedIn) => html`
+export const detailsTemplate = (product, isOwner, isLoggedIn, isInCart) => html`
 <section class="details-section">
 <article class="left-part">
     <img
@@ -31,7 +31,9 @@ export const detailsTemplate = (product, isOwner, isLoggedIn) => html`
         ? html`<div class="action-btns">
              ${ isOwner
                 ? createOwnerBtns()
-                : html`<button id="add-to-cart-btn">Add to cart</button>` 
+                : isInCart
+                  ? html`<button id="remove-from-cart-btn">Remove from cart</button>`
+                  : html`<button id="add-to-cart-btn">Add to cart</button>`  
             }
          </div>`
         : nothing

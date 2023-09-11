@@ -1,4 +1,6 @@
 import { loginUser } from "../../services/authServices.js"
+import { getCartCount } from "../../services/shoppingCartServices.js";
+import { authOperations } from "../../utils/authOperations.js";
 import { validator } from "../../utils/authValidators.js"; 
 // import {validateInputs} from "../../utils/Validate-Input-Fields.js"
 
@@ -14,10 +16,17 @@ async function login(e, ctx){
     // if(isInfoCorrect){
         let isThereErrors = checkForErrors()
         if(isThereErrors){return}
-        await loginUser({email, password})
-        // ctx.showNotification(`Welcome back, ${username}!`, `loadingBox`)
-        e.target.reset()
-        ctx.page.redirect('/catalog')
+        try {
+            await loginUser({email, password})
+            let cartCount = await getCartCount(authOperations.getUserId())
+            console.log(cartCount)
+            authOperations.addItemToSession('cartCount', cartCount)
+            // ctx.showNotification(`Welcome back, ${username}!`, `loadingBox`)
+            e.target.reset()
+            ctx.page.redirect('/catalog')
+        }catch(err){
+            console.log(err)
+        }
     // }
     // else{
     //    ctx.showNotification(`Please enter valid email and password !`, `errorBox`)

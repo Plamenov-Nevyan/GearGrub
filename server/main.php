@@ -60,8 +60,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             echo 'Error: ' . $error->getMessage();
         }
     }else if($action === 'addToCart'){
-        $userId = $_SESSION["userId"];
         $productId = $data["productId"];
+        $userId = $data["userId"];
         require_once "includes/shoppingCartHandler.php";
         try {
             $cartCount = addToCart($userId, $productId);
@@ -76,12 +76,24 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $action = $_GET["delete"];
         if($action === 'deleteSession'){
             session_destroy();
-        }else if($action === 'deleteProduct' & isset($_GET["productId"])){
+        }else if($action === 'deleteProduct' && isset($_GET["productId"])){
             $productId = $_GET["productId"];
             require_once "includes/deleteProductHandler.php";
             try {
                 deleteProduct($productId);
                 echo "Success";
+                exit;
+            }catch(Exception $error){
+                echo 'Error: ' . $error->getMessage();
+            }
+        }else if($action === 'deleteFromCart' && isset($_GET["id"]) && isset($_GET["product"])){
+            $userId = $_GET["id"];
+            $productId = $_GET["product"];
+            require_once "includes/shoppingCartHandler.php";
+            try {
+                removeFromCart($userId, $productId);
+                echo "Success";
+                exit;
             }catch(Exception $error){
                 echo 'Error: ' . $error->getMessage();
             }
@@ -195,7 +207,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             echo 'Error: ' . $error->getMessage();
         }
     }else if(isset($_GET["getCart"])){
-        $userId = $_SESSION["userId"];
+        $userId = $_GET["id"];
         if($_GET["getCart"] === "getCartDetails"){
             require_once "includes/shoppingCartHandler.php";
             try{
@@ -211,6 +223,23 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             try{
                 $cartCount = getCartCount($userId);
                 echo $cartCount;
+                exit;
+            }catch(Exception $error){
+                echo 'Error' . $error->getMessage();
+            }
+        }
+        else if($_GET["getCart"] === "checkIfInCart"){
+            require_once "includes/shoppingCartHandler.php";
+            $productId = $_GET["product"];
+            try{
+                $isInCart = checkIfInCart($userId, $productId);
+                if($isInCart){
+                    header("Content-Type: application/json");
+                    echo json_encode(array('inCart' => true));
+                }else{
+                    header("Content-Type: application/json");
+                    echo json_encode(array('inCart' => false));
+                }
                 exit;
             }catch(Exception $error){
                 echo 'Error' . $error->getMessage();

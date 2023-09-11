@@ -22,7 +22,7 @@ export const navTemplateGuest = () => html`
     </nav>
 `
 
-export const navTemplateUser = () => html`
+export const navTemplateUser = (cartCount) => html`
 <div class="logo-container">
 <img src="static/logo.png" alt="logo"/>
 </div>
@@ -35,7 +35,13 @@ export const navTemplateUser = () => html`
     <a href="/catalog" id="catalog-link">Catalog</a>
     </li>
     <li>
-    <a href="/shopping-cart" id="shpping-cart-link">Shopping Cart</a>
+    <a href="/shopping-cart" id="shpping-cart-link">
+        Shopping Cart
+        ${cartCount > 0
+            ? html `<span>(${cartCount})</span>`
+            : nothing  
+          }
+     </a>
     </li>
     <li>
     <a href="/logout" id="logout-btn">Logout<a>
@@ -44,7 +50,7 @@ export const navTemplateUser = () => html`
 </nav>
 `
 
-export const navTemplateMod = (userRole) => html`
+export const navTemplateMod = (userRole,cartCount) => html`
 <div class="logo-container">
 <img src="static/logo.png" alt="logo"/>
 </div>
@@ -64,7 +70,13 @@ export const navTemplateMod = (userRole) => html`
         : userRole === 'moderator' 
          ? html `
                 <li>
-                    <a href="/shopping-cart" id="shpping-cart-link">Shopping Cart</a>
+                    <a href="/shopping-cart" id="shopping-cart-link">
+                        Shopping Cart
+                        ${cartCount > 0
+                          ? html `<span>(${cartCount})</span>`
+                          : nothing  
+                        }
+                    </a>
                 </li>
                 `
          : nothing

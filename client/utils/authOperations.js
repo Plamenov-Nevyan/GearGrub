@@ -11,9 +11,22 @@ function getSession(){
 function createSession(sessionData){
    sessionStorage.setItem(`session`, JSON.stringify({userId: sessionData[0], userRole: sessionData[1]}))
 }
+
+function addItemToSession(itemKey, itemValue){
+    let session = sessionStorage.getItem('session')
+    if(session){
+        let sessionSerialized = JSON.parse(session)
+        sessionStorage.setItem('session', JSON.stringify({...sessionSerialized, [itemKey]: itemValue}))
+    }
+}
+
 function getUserId(){
     let session = sessionStorage.getItem(`session`) 
     return session ? JSON.parse(session).userId : null
+}
+function getUserCartCount(){
+    let session = sessionStorage.getItem(`session`) 
+    return session ? JSON.parse(session).cartCount : null
 }
 function getUserRole(){
     let session = sessionStorage.getItem(`session`)
@@ -45,6 +58,8 @@ export const authOperations = {
     getSession,
     clearSession,
     getUserId,
-    getUserRole
+    getUserRole,
+    getUserCartCount,
+    addItemToSession
     // navUpdate
 }

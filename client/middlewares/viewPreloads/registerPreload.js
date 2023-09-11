@@ -1,5 +1,7 @@
 import { registerUser } from "../../services/authServices.js";
 import { validator } from "../../utils/authValidators.js"; 
+import { authOperations } from "../../utils/authOperations.js";
+import { getCartCount } from "../../services/shoppingCartServices.js";
 
 export const preloadRegisterData = (ctx, next) => {
     ctx.register = register
@@ -14,6 +16,9 @@ async function register(e,ctx){
     // let doPasswordsMatch = Boolean(password === rePass)
     // if(isInfoCorrect && doPasswordsMatch){
         await registerUser({username,email, phone, password})
+        let cartCount = await getCartCount(authOperations.getUserId())
+        authOperations.addItemToSession('cartCount', cartCount)
+        e.target.reset()
         // ctx.showNotification(`Welcome, ${username}! Your registration is done.`, `loadingBox`)
         ctx.page.redirect('/catalog')
     // }

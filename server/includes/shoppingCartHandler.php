@@ -26,3 +26,21 @@ function getCartCount($userId){
     return $cartCount;
     exit;
 }
+
+function checkIfInCart($userId, $productId){
+    require_once "Classes/Database.php";
+    require_once "Classes/ShoppingCart.php";
+    $cartOps = new ShoppingCart();
+    $isInCart = $cartOps->checkIfAdded($userId,  $productId);
+    return $isInCart;
+    exit;
+}
+
+
+function removeFromCart($userId, $productId){
+    require_once "Classes/Database.php";
+    require_once "Classes/ShoppingCart.php";
+    $cartOps = new ShoppingCart();
+    $cartOps->removeProduct($userId,  $productId);
+    exit;
+}
