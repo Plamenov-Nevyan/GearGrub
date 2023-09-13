@@ -40,6 +40,14 @@ export const detailsTemplate = (product, isOwner, isLoggedIn, isInCart) => html`
         : nothing
     }
 </article>
+<div id="slider-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p id="quantity-para">Select quantity: <span id="quantity-span"></span></p>
+    <div id="slider"></div>
+    <p id="price-calc">Total price: <span id="price-calc-span"></span></p>
+  </div>
+</div>
 </section>
 `
 

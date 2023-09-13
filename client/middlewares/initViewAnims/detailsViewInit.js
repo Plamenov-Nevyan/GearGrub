@@ -16,7 +16,23 @@ export async function detailsViewInit(ctx){
     }
     if(ctx.isLoggedIn && !ctx.isOwner){
       $('#add-to-cart-btn').on('click', function(){
-        ctx.addProductToCart(ctx.product.id, ctx)
+        $('#slider-modal').css({'display' : 'flex'})
+        $('#slider').slider({
+          animate: 'fast',
+          classes: {
+            "ui-slider": "highlight"
+          },
+          max: Number(ctx.product.quantityAvailable),
+          min: 1,
+          orientation: "horizontal",
+          value: 1,
+          slide: function(e, ui){} 
+        })
+        $('#slider').on('slide', function(e, ui){
+            $('#quantity-span').text(`${ui.value} units`)
+            $('#price-calc-span').text(`${ctx.product.price * ui.value} $`)
+        })
+        // ctx.addProductToCart(ctx.product.id, ctx)
       })
       $('#remove-from-cart-btn').on('click', function(){
         ctx.removeProductFromCart(ctx.product.id, ctx)
