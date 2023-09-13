@@ -26,6 +26,7 @@ export const detailsTemplate = (product, isOwner, isLoggedIn, isInCart) => html`
         <h4>On: ${product.created_at.split(' ')[0]}</h4>
         <h4>Email: ${product.owner_email}</h4>
         <h4>Phone: ${product.owner_phone}</h4>
+        <h4>${product.price} $</h4>
     </div>
     ${isLoggedIn
         ? html`<div class="action-btns">

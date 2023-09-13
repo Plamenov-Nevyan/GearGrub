@@ -80,7 +80,7 @@ class ShoppingCart extends Database {
         $statement->bindParam('productId', $productId, PDO::PARAM_INT);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        if(array_key_exists("user_id", $result)){
+        if(!empty($result)){
             return true;
         }else { 
             return false;
@@ -124,7 +124,7 @@ class ShoppingCart extends Database {
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         $pdo = null;
         $statement = null;
-        if(array_key_exists('productCount', $result)){
+        if($result !== false){
             return $result["productCount"];
         }else {
             return 0;

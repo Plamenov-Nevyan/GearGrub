@@ -15,15 +15,12 @@ export async function detailsViewInit(ctx){
         })
     }
     if(ctx.isLoggedIn && !ctx.isOwner){
-      if($('.add-to-cart-btn')){
-        $('#add-to-cart-btn').on('click', function(){
-          ctx.addProductToCart(ctx.product.id, ctx)
-        })
-      }else {
-        $('#remove-from-cart-btn').on('click', function(){
-          ctx.removeProductFromCart(ctx.product.id, ctx)
-        })
-      }
+      $('#add-to-cart-btn').on('click', function(){
+        ctx.addProductToCart(ctx.product.id, ctx)
+      })
+      $('#remove-from-cart-btn').on('click', function(){
+        ctx.removeProductFromCart(ctx.product.id, ctx)
+      })
     }
   })
 }

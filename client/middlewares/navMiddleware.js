@@ -1,12 +1,14 @@
 import { render } from "../node_modules/lit-html/lit-html.js"
+import {getCartCount} from "../services/shoppingCartServices.js"
 import * as navTemplates from "../templates/navTemplate.js"
 let container = document.querySelector('#site-header')
 import { authOperations } from "../utils/authOperations.js"
 
-export function navMiddleware(ctx, next){
+export async function navMiddleware(ctx, next){
     let session = authOperations.getSession()
     if(session){
-      let cartCount = authOperations.getUserCartCount()
+      let cartCount = await getCartCount(authOperations.getUserId())
+      authOperations.addItemToSession('cartCount', cartCount)
        session.userRole === 'user' 
        ? render(navTemplates.navTemplateUser(cartCount), container)
        : render(navTemplates.navTemplateMod(session.userRole, cartCount), container)
